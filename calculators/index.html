@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calcify — Free Calculators</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3PSR9F5316');
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;
+  --border:#1c2230;--border2:#252f40;
+  --accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--accent-glow:rgba(232,160,32,.2);
+  --text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;
+  --green:#34c97c;--green-dim:rgba(52,201,124,.12);
+  --blue:#4a9eff;--blue-dim:rgba(74,158,255,.12);
+  --coral:#ff6b6b;--coral-dim:rgba(255,107,107,.12);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);
+  --teal:#2dd4bf;--teal-dim:rgba(45,212,191,.12);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-home{font-size:12px;color:var(--text-mid);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s;}
+.nav-home:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;letter-spacing:.06em;}
+
+/* LAYOUT */
+.app{display:flex;flex:1;position:relative;z-index:1;}
+
+/* SIDEBAR */
+.sidebar{width:240px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:24px 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+.sidebar-section{padding:0 16px;margin-bottom:8px;}
+.sidebar-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;padding:8px 8px 6px;display:block;}
+.sidebar-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:none;color:var(--text-mid);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;cursor:pointer;border-radius:6px;transition:all .15s;text-align:left;}
+.sidebar-btn:hover{background:var(--surface2);color:var(--text);}
+.sidebar-btn.active{background:var(--accent-dim);color:var(--accent);font-weight:500;}
+.sidebar-btn .s-icon{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sidebar-divider{border:none;border-top:1px solid var(--border);margin:12px 16px;}
+
+/* MAIN */
+.main{flex:1;padding:40px;overflow-y:auto;min-height:calc(100vh - 60px);}
+
+/* CALCULATOR PANEL */
+.calc-panel{display:none;max-width:900px;}
+.calc-panel.active{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.calc-header{margin-bottom:36px;}
+.calc-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.calc-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.02em;line-height:1.1;}
+.calc-title em{font-style:italic;color:var(--accent);}
+.calc-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;max-width:500px;}
+
+/* GRID LAYOUT */
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+.calc-grid.thirds{grid-template-columns:1fr 1fr 1fr;}
+.calc-grid.single{grid-template-columns:1fr;}
+.span-2{grid-column:span 2;}
+.span-3{grid-column:span 3;}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px;}
+.card-title{font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;font-family:'JetBrains Mono',monospace;}
+
+/* INPUTS */
+.field{margin-bottom:20px;}
+.field:last-child{margin-bottom:0;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;margin-bottom:7px;text-transform:uppercase;}
+.input-wrap{position:relative;}
+.prefix,.suffix{position:absolute;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);pointer-events:none;}
+.prefix{left:14px;}
+.suffix{right:14px;}
+input[type=number],input[type=text],input[type=date],select,textarea{
+  width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;
+  padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);
+  outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-moz-appearance:textfield;
+}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input.has-prefix{padding-left:32px;}
+input.has-suffix{padding-right:40px;}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.range-wrap{display:flex;align-items:center;gap:12px;}
+input[type=range]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--border2);outline:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--bg);}
+.range-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);min-width:36px;text-align:right;}
+
+/* BUTTON */
+.btn-calc{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:var(--accent);color:#080b10;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border:none;border-radius:7px;cursor:pointer;transition:all .2s;margin-top:4px;letter-spacing:.01em;}
+.btn-calc:hover{background:#f0b429;box-shadow:0 6px 24px var(--accent-glow);}
+.btn-secondary-calc{background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);}
+.btn-secondary-calc:hover{background:var(--surface3);color:var(--text);box-shadow:none;}
+
+/* RESULT */
+.result-box{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:20px;margin-top:0;}
+.result-hidden{display:none;}
+.result-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:500;color:var(--text);letter-spacing:-.02em;line-height:1;}
+.result-value .unit{font-size:16px;color:var(--text-mid);margin-left:4px;}
+.result-sub{font-size:12px;color:var(--text-mid);margin-top:8px;font-weight:300;line-height:1.5;}
+
+/* RESULT ROW */
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-row-label{font-size:13px;color:var(--text-mid);}
+.result-row-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);}
+.result-row.highlight .result-row-label{color:var(--text);font-weight:500;}
+.result-row.highlight .result-row-val{color:var(--accent);font-size:16px;}
+
+/* HEALTH BAR */
+.health-bar{margin-top:16px;}
+.health-bar-track{height:6px;border-radius:3px;background:linear-gradient(90deg,#4a9eff 0%,#34c97c 22%,#e8a020 44%,#ff6b6b 66%,#dc2626 100%);position:relative;margin:8px 0;}
+.health-marker{position:absolute;top:-5px;width:16px;height:16px;background:var(--text);border-radius:50%;transform:translateX(-50%);border:2px solid var(--bg);transition:left .5s cubic-bezier(.34,1.56,.64,1);}
+.health-labels{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.05em;}
+.bmi-badge{display:inline-flex;padding:4px 12px;border-radius:4px;font-size:12px;font-weight:500;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;margin-top:10px;}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin-top:0;max-height:280px;overflow-y:auto;border-radius:6px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;}
+thead{position:sticky;top:0;background:var(--surface);}
+th{padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-align:right;border-bottom:1px solid var(--border);}
+th:first-child{text-align:left;}
+td{padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);text-align:right;border-bottom:1px solid var(--border);}
+td:first-child{text-align:left;color:var(--text-dim);}
+tr:hover td{background:var(--surface2);}
+tr:last-child td{border-bottom:none;}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;background:var(--surface);border-radius:8px;padding:4px;margin-bottom:24px;border:1px solid var(--border);}
+.tab-btn{flex:1;padding:8px;border:none;background:none;color:var(--text-mid);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;cursor:pointer;border-radius:5px;transition:all .2s;}
+.tab-btn.active{background:var(--surface3);color:var(--text);font-weight:500;}
+
+/* TIMESTAMP */
+.ts-output{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:14px 16px;color:var(--text);word-break:break-all;line-height:1.6;}
+.ts-live{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:12px;}
+.ts-live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;}
+.copy-btn{display:flex;align-items:center;gap:6px;background:var(--surface3);border:1px solid var(--border2);color:var(--text-mid);font-family:'JetBrains Mono',monospace;font-size:10px;padding:6px 12px;border-radius:5px;cursor:pointer;transition:all .2s;margin-top:8px;}
+.copy-btn:hover{color:var(--text);border-color:var(--border2);}
+.copy-btn.copied{color:var(--green);border-color:rgba(52,201,124,.4);}
+
+/* RECIPE */
+.recipe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.recipe-result-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;}
+.recipe-from{font-size:12px;color:var(--text-dim);margin-bottom:4px;}
+.recipe-val{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--text);font-weight:500;}
+.recipe-unit{font-size:11px;color:var(--text-mid);margin-top:2px;}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 8px;border-radius:3px;}
+.badge-green{background:var(--green-dim);color:var(--green);border:1px solid rgba(52,201,124,.2);}
+.badge-amber{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.2);}
+.badge-coral{background:var(--coral-dim);color:var(--coral);border:1px solid rgba(255,107,107,.2);}
+
+/* AGE */
+.age-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.age-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center;}
+.age-card-num{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:500;color:var(--text);line-height:1;}
+.age-card-label{font-size:11px;color:var(--text-dim);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;}
+.age-next{background:var(--accent-dim);border:1px solid rgba(232,160,32,.25);border-radius:8px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.age-next-label{font-size:13px;color:var(--text-mid);}
+.age-next-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);}
+
+/* SQUARE FOOTAGE */
+.sf-shape-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.sf-shape{padding:12px;border:1px solid var(--border2);border-radius:7px;cursor:pointer;text-align:center;font-size:12px;color:var(--text-mid);transition:all .2s;background:var(--surface2);}
+.sf-shape:hover,.sf-shape.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+.sf-shape .shape-icon{font-size:20px;display:block;margin-bottom:4px;}
+
+/* MOBILE */
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .main{padding:20px;}
+  .calc-grid{grid-template-columns:1fr;}
+  .span-2,.span-3{grid-column:span 1;}
+  .calc-grid.thirds{grid-template-columns:1fr;}
+  .age-grid{grid-template-columns:repeat(2,1fr);}
+  .recipe-grid{grid-template-columns:repeat(2,1fr);}
+  .sf-shape-grid{grid-template-columns:repeat(3,1fr);}
+}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:100;padding:8px 0 env(safe-area-inset-bottom);}
+@media(max-width:768px){.mobile-nav{display:flex;}}
+.mob-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--text-dim);font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.04em;padding:6px 4px;cursor:pointer;transition:color .2s;}
+.mob-btn.active{color:var(--accent);}
+.mob-btn .mob-icon{font-size:18px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>Calcify</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-home">← Back to Home</a>
+    <span class="nav-tag">ALL FREE</span>
+  </div>
+</nav>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Finance</span>
+      <button class="sidebar-btn active" onclick="show('mortgage')">
+        <span class="s-icon">🏠</span>Mortgage
+      </button>
+      <button class="sidebar-btn" onclick="show('emi')">
+        <span class="s-icon">💰</span>EMI / Loan
+      </button>
+      <button class="sidebar-btn" onclick="show('tax')">
+        <span class="s-icon">📊</span>Tax Estimator
+      </button>
+    </div>
+    <hr class="sidebar-divider"/>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Health</span>
+      <button class="sidebar-btn" onclick="show('bmi')">
+        <span class="s-icon">❤️</span>BMI
+      </button>
+      <button class="sidebar-btn" onclick="show('calorie')">
+        <span class="s-icon">🔥</span>Calorie / TDEE
+      </button>
+    </div>
+    <hr class="sidebar-divider"/>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Everyday</span>
+      <button class="sidebar-btn" onclick="show('age')">
+        <span class="s-icon">🎂</span>Age Calculator
+      </button>
+      <button class="sidebar-btn" onclick="show('sqft')">
+        <span class="s-icon">📐</span>Square Footage
+      </button>
+      <button class="sidebar-btn" onclick="show('recipe')">
+        <span class="s-icon">🍳</span>Recipe Converter
+      </button>
+    </div>
+    <hr class="sidebar-divider"/>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Developer</span>
+      <button class="sidebar-btn" onclick="show('timestamp')">
+        <span class="s-icon">⏱️</span>Unix Timestamp
+      </button>
+      <button class="sidebar-btn" onclick="show('base64')">
+        <span class="s-icon">🔐</span>Base64
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MORTGAGE CALCULATOR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel active" id="panel-mortgage">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// finance.mortgage</div>
+        <h1 class="calc-title">Mortgage <em>Calculator</em></h1>
+        <p class="calc-desc">Estimate your monthly payment, total interest, and view the full amortization schedule.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Loan Details</div>
+          <div class="field">
+            <label>Home Price</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="m-price" class="has-prefix" value="400000" min="0"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Down Payment</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="m-down" class="has-prefix" value="80000" min="0"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Annual Interest Rate</label>
+            <div class="range-wrap">
+              <input type="range" id="m-rate-range" min="1" max="12" step="0.1" value="6.8" oninput="document.getElementById('m-rate').value=this.value;calcMortgage()"/>
+              <span class="range-val" id="m-rate-display">6.8%</span>
+            </div>
+            <div class="input-wrap" style="margin-top:8px;">
+              <input type="number" id="m-rate" class="has-suffix" value="6.8" step="0.1" min="0.1" max="20"/>
+              <span class="suffix">%</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Loan Term</label>
+            <select id="m-term">
+              <option value="30">30 Years</option>
+              <option value="20">20 Years</option>
+              <option value="15">15 Years</option>
+              <option value="10">10 Years</option>
+            </select>
+          </div>
+          <button class="btn-calc" onclick="calcMortgage()">Calculate Payment</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div id="m-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">Monthly Payment</div>
+              <div class="result-value" id="m-monthly">—</div>
+              <div class="result-sub" id="m-sub"></div>
+            </div>
+            <div class="result-row highlight">
+              <span class="result-row-label">Loan Amount</span>
+              <span class="result-row-val" id="m-loan">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Total Interest</span>
+              <span class="result-row-val" id="m-interest">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Total Cost</span>
+              <span class="result-row-val" id="m-total">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Payoff Date</span>
+              <span class="result-row-val" id="m-payoff">—</span>
+            </div>
+          </div>
+          <div id="m-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Enter your loan details and click Calculate to see your payment breakdown.</div>
+        </div>
+        <div class="card span-2" id="m-schedule-card" style="display:none;">
+          <div class="card-title">Amortization Schedule</div>
+          <div class="table-wrap">
+            <table id="m-table">
+              <thead><tr><th>Year</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+              <tbody id="m-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- EMI CALCULATOR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-emi">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// finance.emi</div>
+        <h1 class="calc-title">EMI / Loan <em>Calculator</em></h1>
+        <p class="calc-desc">Calculate monthly installments for home, auto, personal, or student loans with full breakdown.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Loan Details</div>
+          <div class="field">
+            <label>Loan Type</label>
+            <select id="e-type" onchange="updateEmiCurrency()">
+              <option value="usd">USD — Home / Auto / Personal</option>
+              <option value="inr">₹ INR — Home / Car / Personal</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Principal Amount</label>
+            <div class="input-wrap">
+              <span class="prefix" id="e-prefix">$</span>
+              <input type="number" id="e-principal" class="has-prefix" value="250000"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Annual Interest Rate</label>
+            <div class="range-wrap">
+              <input type="range" id="e-rate-range" min="1" max="20" step="0.1" value="8.5" oninput="document.getElementById('e-rate').value=this.value;calcEMI()"/>
+              <span class="range-val" id="e-rate-display">8.5%</span>
+            </div>
+            <div class="input-wrap" style="margin-top:8px;">
+              <input type="number" id="e-rate" class="has-suffix" value="8.5" step="0.1"/>
+              <span class="suffix">%</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Loan Tenure</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="input-wrap">
+                <input type="number" id="e-years" value="20" min="1" max="30" placeholder="Years"/>
+                <span class="suffix">yrs</span>
+              </div>
+              <div class="input-wrap">
+                <input type="number" id="e-months" value="0" min="0" max="11" placeholder="Months"/>
+                <span class="suffix">mo</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calcEMI()">Calculate EMI</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div id="e-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">Monthly EMI</div>
+              <div class="result-value" id="e-monthly">—</div>
+            </div>
+            <div class="result-row highlight">
+              <span class="result-row-label">Principal Amount</span>
+              <span class="result-row-val" id="e-prin-out">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Total Interest</span>
+              <span class="result-row-val" id="e-int-out">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Total Payment</span>
+              <span class="result-row-val" id="e-total-out">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Interest to Principal</span>
+              <span class="result-row-val" id="e-ratio">—</span>
+            </div>
+          </div>
+          <div id="e-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Fill in your loan details to see the monthly installment and cost breakdown.</div>
+        </div>
+        <div class="card span-2" id="e-schedule-card" style="display:none;">
+          <div class="card-title">Year-wise Breakup</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Year</th><th>Principal Paid</th><th>Interest Paid</th><th>Total Paid</th><th>Balance</th></tr></thead>
+              <tbody id="e-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAX ESTIMATOR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-tax">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// finance.tax</div>
+        <h1 class="calc-title">US Tax <em>Estimator</em></h1>
+        <p class="calc-desc">Estimate your 2025–26 federal income tax based on the latest IRS brackets. Not tax advice.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Income Details</div>
+          <div class="field">
+            <label>Filing Status</label>
+            <select id="t-status">
+              <option value="single">Single</option>
+              <option value="married_joint">Married Filing Jointly</option>
+              <option value="married_sep">Married Filing Separately</option>
+              <option value="hoh">Head of Household</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Annual Gross Income</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="t-income" class="has-prefix" value="95000"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>401(k) / Pre-tax Deductions</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="t-pretax" class="has-prefix" value="7000"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Other Deductions (Itemized)</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input type="number" id="t-other" class="has-prefix" value="0"/>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calcTax()">Estimate Tax</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Tax Summary</div>
+          <div id="t-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">Estimated Tax Owed</div>
+              <div class="result-value" id="t-tax-out">—</div>
+              <div class="result-sub" id="t-sub"></div>
+            </div>
+            <div class="result-row highlight">
+              <span class="result-row-label">Taxable Income</span>
+              <span class="result-row-val" id="t-taxable">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Effective Tax Rate</span>
+              <span class="result-row-val" id="t-effective">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Marginal Bracket</span>
+              <span class="result-row-val" id="t-bracket">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Est. Monthly Tax</span>
+              <span class="result-row-val" id="t-monthly">—</span>
+            </div>
+          </div>
+          <div id="t-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Enter your income details to estimate your federal tax liability.</div>
+        </div>
+        <div class="card span-2" id="t-bracket-card" style="display:none;">
+          <div class="card-title">Bracket Breakdown — 2025</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Bracket</th><th>Rate</th><th>Income in Bracket</th><th>Tax</th></tr></thead>
+              <tbody id="t-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- BMI CALCULATOR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-bmi">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// health.bmi</div>
+        <h1 class="calc-title">BMI <em>Calculator</em></h1>
+        <p class="calc-desc">Calculate your Body Mass Index using CDC guidelines. Metric and imperial supported.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Your Measurements</div>
+          <div class="tab-bar">
+            <button class="tab-btn active" id="bmi-tab-imp" onclick="switchBMITab('imperial')">Imperial (lbs / ft)</button>
+            <button class="tab-btn" id="bmi-tab-met" onclick="switchBMITab('metric')">Metric (kg / cm)</button>
+          </div>
+          <div id="bmi-imperial">
+            <div class="field">
+              <label>Height</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="input-wrap">
+                  <input type="number" id="b-ft" value="5" min="1" max="8"/>
+                  <span class="suffix">ft</span>
+                </div>
+                <div class="input-wrap">
+                  <input type="number" id="b-in" value="10" min="0" max="11"/>
+                  <span class="suffix">in</span>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Weight</label>
+              <div class="input-wrap">
+                <input type="number" id="b-lbs" value="170" class="has-suffix"/>
+                <span class="suffix">lbs</span>
+              </div>
+            </div>
+          </div>
+          <div id="bmi-metric" style="display:none;">
+            <div class="field">
+              <label>Height</label>
+              <div class="input-wrap">
+                <input type="number" id="b-cm" value="178" class="has-suffix"/>
+                <span class="suffix">cm</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>Weight</label>
+              <div class="input-wrap">
+                <input type="number" id="b-kg" value="77" class="has-suffix"/>
+                <span class="suffix">kg</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Age (optional)</label>
+            <div class="input-wrap">
+              <input type="number" id="b-age" value="30" min="2" max="120" class="has-suffix"/>
+              <span class="suffix">yrs</span>
+            </div>
+          </div>
+          <button class="btn-calc" onclick="calcBMI()">Calculate BMI</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div id="b-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">Your BMI</div>
+              <div class="result-value" id="b-bmi">—</div>
+              <div id="b-badge" style="margin-top:10px;"></div>
+            </div>
+            <div class="health-bar">
+              <div class="health-bar-track">
+                <div class="health-marker" id="b-marker" style="left:0%"></div>
+              </div>
+              <div class="health-labels">
+                <span>Underweight</span><span>Normal</span><span>Overweight</span><span>Obese</span>
+              </div>
+            </div>
+            <div style="margin-top:20px;">
+              <div class="result-row">
+                <span class="result-row-label">Category</span>
+                <span class="result-row-val" id="b-cat">—</span>
+              </div>
+              <div class="result-row">
+                <span class="result-row-label">Healthy Weight Range</span>
+                <span class="result-row-val" id="b-range">—</span>
+              </div>
+              <div class="result-row">
+                <span class="result-row-label">BMI Prime</span>
+                <span class="result-row-val" id="b-prime">—</span>
+              </div>
+            </div>
+          </div>
+          <div id="b-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Enter your height and weight to calculate your Body Mass Index.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CALORIE / TDEE -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-calorie">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// health.tdee</div>
+        <h1 class="calc-title">Calorie <em>& TDEE</em></h1>
+        <p class="calc-desc">Calculate your Total Daily Energy Expenditure and calorie targets for weight goals.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Your Details</div>
+          <div class="field">
+            <label>Sex</label>
+            <select id="c-sex"><option value="male">Male</option><option value="female">Female</option></select>
+          </div>
+          <div class="field">
+            <label>Age</label>
+            <div class="input-wrap">
+              <input type="number" id="c-age" value="30" class="has-suffix"/>
+              <span class="suffix">yrs</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Weight</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="input-wrap"><input type="number" id="c-lbs" value="170" class="has-suffix"/><span class="suffix">lbs</span></div>
+              <div class="input-wrap"><input type="number" id="c-kg" value="77" class="has-suffix" placeholder="or kg"/><span class="suffix">kg</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Height</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="input-wrap"><input type="number" id="c-ft" value="5" class="has-suffix"/><span class="suffix">ft</span></div>
+              <div class="input-wrap"><input type="number" id="c-in" value="10" class="has-suffix"/><span class="suffix">in</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Activity Level</label>
+            <select id="c-activity">
+              <option value="1.2">Sedentary (little/no exercise)</option>
+              <option value="1.375">Lightly Active (1–3 days/week)</option>
+              <option value="1.55" selected>Moderately Active (3–5 days)</option>
+              <option value="1.725">Very Active (6–7 days/week)</option>
+              <option value="1.9">Extra Active (athlete / physical job)</option>
+            </select>
+          </div>
+          <button class="btn-calc" onclick="calcCalorie()">Calculate TDEE</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Your Daily Calories</div>
+          <div id="c-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">TDEE — Maintenance</div>
+              <div class="result-value" id="c-tdee">—</div>
+              <div class="result-sub">calories per day to maintain weight</div>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">BMR (base metabolic rate)</span>
+              <span class="result-row-val" id="c-bmr">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Weight Loss (−500 cal)</span>
+              <span class="result-row-val" id="c-loss">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Mild Loss (−250 cal)</span>
+              <span class="result-row-val" id="c-mild-loss">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-label">Weight Gain (+500 cal)</span>
+              <span class="result-row-val" id="c-gain">—</span>
+            </div>
+          </div>
+          <div id="c-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Enter your stats to calculate your daily calorie needs using the Mifflin-St Jeor equation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- AGE CALCULATOR -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-age">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// everyday.age</div>
+        <h1 class="calc-title">Age <em>Calculator</em></h1>
+        <p class="calc-desc">Calculate exact age and time until next birthday — down to days.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Date of Birth</div>
+          <div class="field">
+            <label>Your Date of Birth</label>
+            <input type="date" id="a-dob" value="1990-06-15"/>
+          </div>
+          <div class="field">
+            <label>Calculate Age As Of</label>
+            <input type="date" id="a-asof"/>
+          </div>
+          <button class="btn-calc" onclick="calcAge()">Calculate Age</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div id="a-results" class="result-hidden">
+            <div class="age-grid" style="margin-bottom:16px;" id="a-grid"></div>
+            <div class="age-next" id="a-next"></div>
+          </div>
+          <div id="a-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Select your date of birth to see your exact age and birthday countdown.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SQUARE FOOTAGE -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-sqft">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// everyday.area</div>
+        <h1 class="calc-title">Square Footage <em>Calculator</em></h1>
+        <p class="calc-desc">Calculate room area for flooring, paint, tile, carpet, or landscaping projects.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Shape & Dimensions</div>
+          <div class="sf-shape-grid">
+            <div class="sf-shape active" id="sf-rect" onclick="selectShape('rect')"><span class="shape-icon">⬜</span>Rectangle</div>
+            <div class="sf-shape" id="sf-circ" onclick="selectShape('circ')"><span class="shape-icon">⭕</span>Circle</div>
+            <div class="sf-shape" id="sf-tri" onclick="selectShape('tri')"><span class="shape-icon">🔺</span>Triangle</div>
+          </div>
+          <div id="sf-rect-fields">
+            <div class="field">
+              <label>Length</label>
+              <div class="input-wrap"><input type="number" id="sf-len" value="12" class="has-suffix"/><span class="suffix">ft</span></div>
+            </div>
+            <div class="field">
+              <label>Width</label>
+              <div class="input-wrap"><input type="number" id="sf-wid" value="10" class="has-suffix"/><span class="suffix">ft</span></div>
+            </div>
+          </div>
+          <div id="sf-circ-fields" style="display:none;">
+            <div class="field">
+              <label>Radius</label>
+              <div class="input-wrap"><input type="number" id="sf-rad" value="5" class="has-suffix"/><span class="suffix">ft</span></div>
+            </div>
+          </div>
+          <div id="sf-tri-fields" style="display:none;">
+            <div class="field">
+              <label>Base</label>
+              <div class="input-wrap"><input type="number" id="sf-base" value="10" class="has-suffix"/><span class="suffix">ft</span></div>
+            </div>
+            <div class="field">
+              <label>Height</label>
+              <div class="input-wrap"><input type="number" id="sf-height" value="8" class="has-suffix"/><span class="suffix">ft</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Material Cost per sq ft (optional)</label>
+            <div class="input-wrap"><span class="prefix">$</span><input type="number" id="sf-cost" class="has-prefix" value="0" placeholder="0.00"/></div>
+          </div>
+          <button class="btn-calc" onclick="calcSqft()">Calculate Area</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Results</div>
+          <div id="sf-results" class="result-hidden">
+            <div class="result-box" style="margin-bottom:16px;">
+              <div class="result-label">Area</div>
+              <div class="result-value" id="sf-sqft-out">—</div>
+            </div>
+            <div class="result-row"><span class="result-row-label">Square Meters</span><span class="result-row-val" id="sf-sqm">—</span></div>
+            <div class="result-row"><span class="result-row-label">Square Yards</span><span class="result-row-val" id="sf-sqyd">—</span></div>
+            <div class="result-row"><span class="result-row-label">Acres</span><span class="result-row-val" id="sf-acres">—</span></div>
+            <div class="result-row" id="sf-cost-row" style="display:none;"><span class="result-row-label">Estimated Cost</span><span class="result-row-val" id="sf-cost-out">—</span></div>
+          </div>
+          <div id="sf-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Select a shape, enter dimensions, and get your area in multiple units instantly.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- RECIPE CONVERTER -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-recipe">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// everyday.recipe</div>
+        <h1 class="calc-title">Recipe <em>Converter</em></h1>
+        <p class="calc-desc">Convert cooking measurements instantly — grams, cups, tablespoons, teaspoons, and more.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="card">
+          <div class="card-title">Convert Measurement</div>
+          <div class="field">
+            <label>Amount</label>
+            <input type="number" id="r-amount" value="1" step="0.1" min="0"/>
+          </div>
+          <div class="field">
+            <label>From Unit</label>
+            <select id="r-from">
+              <option value="cup">Cup (US)</option>
+              <option value="tbsp">Tablespoon</option>
+              <option value="tsp">Teaspoon</option>
+              <option value="ml">Milliliter (ml)</option>
+              <option value="l">Liter (L)</option>
+              <option value="fl_oz">Fluid Ounce (fl oz)</option>
+              <option value="g">Gram (g)</option>
+              <option value="kg">Kilogram (kg)</option>
+              <option value="oz">Ounce (oz)</option>
+              <option value="lb">Pound (lb)</option>
+            </select>
+          </div>
+          <button class="btn-calc" onclick="calcRecipe()">Convert All Units</button>
+          <div style="margin-top:16px;padding:12px;background:var(--accent-dim);border-radius:7px;border:1px solid rgba(232,160,32,.2);">
+            <div style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;margin-bottom:6px;">NOTE</div>
+            <div style="font-size:12px;color:var(--text-mid);line-height:1.5;">Volume and weight conversions assume water density (1g/ml). For flour, sugar, butter, results will vary — use a kitchen scale for precision baking.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">All Conversions</div>
+          <div id="r-results" class="result-hidden">
+            <div class="recipe-grid" id="r-grid"></div>
+          </div>
+          <div id="r-placeholder" style="color:var(--text-dim);font-size:13px;line-height:1.6;">Enter an amount and select a unit to see instant conversions across all cooking measurements.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- UNIX TIMESTAMP -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-timestamp">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// developer.timestamp</div>
+        <h1 class="calc-title">Unix Timestamp <em>Converter</em></h1>
+        <p class="calc-desc">Convert between Unix epoch timestamps and human-readable dates. Runs entirely in your browser.</p>
+      </div>
+      <div class="calc-grid single">
+        <div class="card">
+          <div class="ts-live"><span class="ts-live-dot"></span><span id="ts-now-label">Live: </span><span id="ts-live-val"></span></div>
+          <div class="calc-grid" style="margin-bottom:0;">
+            <div>
+              <div class="card-title" style="margin-bottom:14px;">Timestamp → Date</div>
+              <div class="field">
+                <label>Unix Timestamp (seconds)</label>
+                <input type="number" id="ts-epoch" placeholder="e.g. 1743552000"/>
+              </div>
+              <button class="btn-calc" onclick="epochToDate()">Convert to Date</button>
+              <div id="ts-date-out" class="ts-output result-hidden" style="margin-top:12px;"></div>
+              <button class="copy-btn result-hidden" id="ts-copy1" onclick="copyText('ts-date-out','ts-copy1')">📋 Copy</button>
+            </div>
+            <div>
+              <div class="card-title" style="margin-bottom:14px;">Date → Timestamp</div>
+              <div class="field">
+                <label>Date & Time (local)</label>
+                <input type="datetime-local" id="ts-dateinput"/>
+              </div>
+              <button class="btn-calc" onclick="dateToEpoch()">Convert to Timestamp</button>
+              <div id="ts-epoch-out" class="ts-output result-hidden" style="margin-top:12px;"></div>
+              <button class="copy-btn result-hidden" id="ts-copy2" onclick="copyText('ts-epoch-out','ts-copy2')">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- BASE64 -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="calc-panel" id="panel-base64">
+      <div class="calc-header">
+        <div class="calc-eyebrow">// developer.base64</div>
+        <h1 class="calc-title">Base64 <em>Encoder/Decoder</em></h1>
+        <p class="calc-desc">Encode or decode Base64 strings. Nothing leaves your browser — fully private.</p>
+      </div>
+      <div class="calc-grid single">
+        <div class="card">
+          <div class="calc-grid">
+            <div>
+              <div class="card-title" style="margin-bottom:12px;">Input</div>
+              <div class="field">
+                <label>Text or Base64 String</label>
+                <textarea id="b64-input" rows="6" style="resize:vertical;" placeholder="Paste text to encode, or Base64 to decode..."></textarea>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <button class="btn-calc" onclick="doBase64('encode')">Encode →</button>
+                <button class="btn-calc btn-secondary-calc" onclick="doBase64('decode')">← Decode</button>
+              </div>
+            </div>
+            <div>
+              <div class="card-title" style="margin-bottom:12px;">Output</div>
+              <textarea id="b64-output" rows="6" style="resize:vertical;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);width:100%;outline:none;" readonly placeholder="Result appears here..."></textarea>
+              <button class="copy-btn" id="b64-copy" onclick="copyText('b64-output','b64-copy')" style="margin-top:8px;">📋 Copy Result</button>
+              <div id="b64-error" style="display:none;color:var(--coral);font-size:12px;margin-top:8px;padding:8px 12px;background:var(--coral-dim);border-radius:5px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+  <button class="mob-btn active" onclick="show('mortgage')"><span class="mob-icon">🏠</span>Mortgage</button>
+  <button class="mob-btn" onclick="show('bmi')"><span class="mob-icon">❤️</span>BMI</button>
+  <button class="mob-btn" onclick="show('age')"><span class="mob-icon">🎂</span>Age</button>
+  <button class="mob-btn" onclick="show('timestamp')"><span class="mob-icon">⏱️</span>Timestamp</button>
+  <button class="mob-btn" onclick="show('recipe')"><span class="mob-icon">🍳</span>Recipe</button>
+</nav>
+
+<script>
+// ─── NAVIGATION ───
+const panels = ['mortgage','emi','tax','bmi','calorie','age','sqft','recipe','timestamp','base64'];
+
+function show(id) {
+  panels.forEach(p => {
+    document.getElementById('panel-'+p)?.classList.remove('active');
+  });
+  document.getElementById('panel-'+id)?.classList.add('active');
+  // sidebar btns
+  document.querySelectorAll('.sidebar-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick')?.includes("'"+id+"'"));
+  });
+  // mobile btns
+  document.querySelectorAll('.mob-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick')?.includes("'"+id+"'"));
+  });
+  window.scrollTo(0,0);
+}
+
+// ─── FORMAT ───
+const fmt = (n, prefix='$') => prefix + n.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
+const fmtD = (n, prefix='$') => prefix + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+// ─── MORTGAGE ───
+function calcMortgage() {
+  const price = +document.getElementById('m-price').value||0;
+  const down  = +document.getElementById('m-down').value||0;
+  const rate  = +document.getElementById('m-rate').value||0;
+  const years = +document.getElementById('m-term').value||30;
+  document.getElementById('m-rate-range').value = rate;
+  document.getElementById('m-rate-display').textContent = rate.toFixed(1)+'%';
+  const principal = price - down;
+  const r = (rate/100)/12, n = years*12;
+  if(r===0||principal<=0){return;}
+  const monthly = principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  const totalPaid = monthly*n;
+  const totalInterest = totalPaid - principal;
+  const payoffDate = new Date();
+  payoffDate.setMonth(payoffDate.getMonth()+n);
+  document.getElementById('m-monthly').textContent = fmtD(monthly);
+  document.getElementById('m-loan').textContent = fmt(principal);
+  document.getElementById('m-interest').textContent = fmt(totalInterest);
+  document.getElementById('m-total').textContent = fmt(totalPaid);
+  document.getElementById('m-payoff').textContent = payoffDate.toLocaleDateString('en-US',{month:'short',year:'numeric'});
+  document.getElementById('m-sub').textContent = `Principal: ${fmtD(principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1)-principal*(r*Math.pow(1+r,1))/(Math.pow(1+r,1)-1))} | Interest in first payment: ${fmtD(principal*r)}`;
+  document.getElementById('m-results').classList.remove('result-hidden');
+  document.getElementById('m-placeholder').style.display='none';
+  // Amortization table (yearly)
+  const tbody = document.getElementById('m-tbody');
+  tbody.innerHTML='';
+  let bal = principal;
+  for(let y=1;y<=years;y++){
+    let yearPrincipal=0, yearInterest=0;
+    for(let m=0;m<12;m++){
+      const int=bal*r, prin=monthly-int;
+      yearInterest+=int; yearPrincipal+=prin; bal-=prin;
+    }
+    const yr = new Date().getFullYear()+y-1;
+    tbody.innerHTML+=`<tr><td>${yr}</td><td>${fmtD(monthly*12)}</td><td>${fmtD(yearPrincipal)}</td><td>${fmtD(yearInterest)}</td><td>${fmtD(Math.max(bal,0))}</td></tr>`;
+  }
+  document.getElementById('m-schedule-card').style.display='block';
+}
+
+// ─── EMI ───
+function updateEmiCurrency(){
+  const usd = document.getElementById('e-type').value==='usd';
+  document.getElementById('e-prefix').textContent = usd?'$':'₹';
+  document.getElementById('e-principal').value = usd?250000:2000000;
+}
+function calcEMI(){
+  const principal = +document.getElementById('e-principal').value||0;
+  const rate      = +document.getElementById('e-rate').value||0;
+  const years     = +document.getElementById('e-years').value||0;
+  const months    = +document.getElementById('e-months').value||0;
+  const isINR     = document.getElementById('e-type').value==='inr';
+  const pfx       = isINR?'₹':'$';
+  document.getElementById('e-rate-range').value=rate;
+  document.getElementById('e-rate-display').textContent=rate.toFixed(1)+'%';
+  const n = years*12+months, r = (rate/100)/12;
+  if(n<=0||principal<=0) return;
+  const emi = r===0 ? principal/n : principal*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  const total=emi*n, interest=total-principal;
+  document.getElementById('e-monthly').textContent = pfx+fmtD(emi).slice(1);
+  document.getElementById('e-prin-out').textContent = pfx+fmt(principal).slice(1);
+  document.getElementById('e-int-out').textContent  = pfx+fmt(interest).slice(1);
+  document.getElementById('e-total-out').textContent= pfx+fmt(total).slice(1);
+  document.getElementById('e-ratio').textContent    = ((interest/principal)*100).toFixed(1)+'%';
+  document.getElementById('e-results').classList.remove('result-hidden');
+  document.getElementById('e-placeholder').style.display='none';
+  // Yearly table
+  const tbody=document.getElementById('e-tbody'); tbody.innerHTML='';
+  let bal=principal;
+  for(let y=1;y<=years+(months>0?1:0);y++){
+    let yp=0,yi=0,cnt=0;
+    while(cnt<12&&bal>0){
+      const int=bal*r,prin=Math.min(emi-int,bal);
+      yi+=int;yp+=prin;bal-=prin;cnt++;
+    }
+    tbody.innerHTML+=`<tr><td>Year ${y}</td><td>${pfx}${fmt(yp).slice(1)}</td><td>${pfx}${fmt(yi).slice(1)}</td><td>${pfx}${fmt(yp+yi).slice(1)}</td><td>${pfx}${fmt(Math.max(bal,0)).slice(1)}</td></tr>`;
+  }
+  document.getElementById('e-schedule-card').style.display='block';
+}
+
+// ─── TAX ───
+const TAX_BRACKETS = {
+  single:       [[11925,.10],[48475,.12],[103350,.22],[197300,.24],[250525,.32],[626350,.35],[Infinity,.37]],
+  married_joint:[[23850,.10],[96950,.12],[206700,.22],[394600,.24],[501050,.32],[751600,.35],[Infinity,.37]],
+  married_sep:  [[11925,.10],[48475,.12],[103350,.22],[197300,.24],[250525,.32],[375800,.35],[Infinity,.37]],
+  hoh:          [[17000,.10],[64850,.12],[103350,.22],[197300,.24],[250500,.32],[626350,.35],[Infinity,.37]],
+};
+const STD_DED = {single:15000,married_joint:30000,married_sep:15000,hoh:22500};
+function calcTax(){
+  const status   = document.getElementById('t-status').value;
+  const gross    = +document.getElementById('t-income').value||0;
+  const pretax   = +document.getElementById('t-pretax').value||0;
+  const itemized = +document.getElementById('t-other').value||0;
+  const agi      = gross-pretax;
+  const stdDed   = STD_DED[status];
+  const deduction= Math.max(stdDed, itemized);
+  const taxable  = Math.max(agi-deduction,0);
+  const brackets = TAX_BRACKETS[status];
+  let tax=0, prev=0, marginal=0, rows='';
+  for(const [limit,rate] of brackets){
+    if(taxable<=prev) break;
+    const chunk=Math.min(taxable,limit)-prev;
+    const t=chunk*rate;
+    rows+=`<tr><td>$${fmt(prev).slice(1)}–${limit===Infinity?'+':'$'+fmt(limit).slice(1)}</td><td>${(rate*100).toFixed(0)}%</td><td>$${fmt(chunk).slice(1)}</td><td>$${fmtD(t).slice(1)}</td></tr>`;
+    tax+=t; marginal=rate; prev=limit;
+    if(taxable<=limit) break;
+  }
+  const effective = (tax/gross*100).toFixed(2);
+  document.getElementById('t-tax-out').textContent = fmtD(tax);
+  document.getElementById('t-sub').textContent = `Effective rate: ${effective}% | Standard deduction: ${fmt(stdDed)}`;
+  document.getElementById('t-taxable').textContent = fmt(taxable);
+  document.getElementById('t-effective').textContent = effective+'%';
+  document.getElementById('t-bracket').textContent = (marginal*100)+'%';
+  document.getElementById('t-monthly').textContent = fmtD(tax/12);
+  document.getElementById('t-results').classList.remove('result-hidden');
+  document.getElementById('t-placeholder').style.display='none';
+  document.getElementById('t-tbody').innerHTML=rows;
+  document.getElementById('t-bracket-card').style.display='block';
+}
+
+// ─── BMI ───
+let bmiMode='imperial';
+function switchBMITab(mode){
+  bmiMode=mode;
+  document.getElementById('bmi-imperial').style.display=mode==='imperial'?'block':'none';
+  document.getElementById('bmi-metric').style.display=mode==='metric'?'block':'none';
+  document.getElementById('bmi-tab-imp').classList.toggle('active',mode==='imperial');
+  document.getElementById('bmi-tab-met').classList.toggle('active',mode==='metric');
+}
+function calcBMI(){
+  let heightM, weightKg;
+  if(bmiMode==='imperial'){
+    const ft=+document.getElementById('b-ft').value||0;
+    const inch=+document.getElementById('b-in').value||0;
+    heightM=(ft*12+inch)*0.0254;
+    weightKg=(+document.getElementById('b-lbs').value||0)*0.453592;
+  } else {
+    heightM=(+document.getElementById('b-cm').value||0)/100;
+    weightKg=+document.getElementById('b-kg').value||0;
+  }
+  if(!heightM||!weightKg) return;
+  const bmi=weightKg/(heightM*heightM);
+  const minKg=18.5*heightM*heightM, maxKg=24.9*heightM*heightM;
+  const [minLbs,maxLbs]=[minKg/0.453592,maxKg/0.453592];
+  let cat,color,badge,pos;
+  if(bmi<18.5){cat='Underweight';color='var(--blue)';badge='badge-dev';pos=Math.min(bmi/18.5*20,20);}
+  else if(bmi<25){cat='Normal Weight';color='var(--green)';badge='badge-green';pos=20+(bmi-18.5)/(25-18.5)*22;}
+  else if(bmi<30){cat='Overweight';color='var(--accent)';badge='badge-amber';pos=42+(bmi-25)/5*22;}
+  else{cat='Obese';color='var(--coral)';badge='badge-coral';pos=Math.min(64+(bmi-30)/10*36,98);}
+  document.getElementById('b-bmi').textContent=bmi.toFixed(1);
+  document.getElementById('b-badge').innerHTML=`<span class="bmi-badge ${badge}">${cat}</span>`;
+  document.getElementById('b-marker').style.left=pos+'%';
+  document.getElementById('b-cat').textContent=cat;
+  const rng=bmiMode==='imperial'?`${minLbs.toFixed(0)}–${maxLbs.toFixed(0)} lbs`:`${minKg.toFixed(1)}–${maxKg.toFixed(1)} kg`;
+  document.getElementById('b-range').textContent=rng;
+  document.getElementById('b-prime').textContent=(bmi/25).toFixed(2);
+  document.getElementById('b-results').classList.remove('result-hidden');
+  document.getElementById('b-placeholder').style.display='none';
+}
+
+// ─── CALORIE ───
+function calcCalorie(){
+  const sex=document.getElementById('c-sex').value;
+  const age=+document.getElementById('c-age').value||30;
+  const lbs=+document.getElementById('c-lbs').value||170;
+  const ft=+document.getElementById('c-ft').value||5;
+  const inch=+document.getElementById('c-in').value||10;
+  const activity=+document.getElementById('c-activity').value;
+  const kg=lbs*0.453592, cm=(ft*12+inch)*2.54;
+  let bmr = sex==='male'
+    ? 10*kg + 6.25*cm - 5*age + 5
+    : 10*kg + 6.25*cm - 5*age - 161;
+  const tdee=Math.round(bmr*activity);
+  document.getElementById('c-bmr').textContent=Math.round(bmr)+' cal';
+  document.getElementById('c-tdee').textContent=tdee+' cal';
+  document.getElementById('c-loss').textContent=(tdee-500)+' cal';
+  document.getElementById('c-mild-loss').textContent=(tdee-250)+' cal';
+  document.getElementById('c-gain').textContent=(tdee+500)+' cal';
+  document.getElementById('c-results').classList.remove('result-hidden');
+  document.getElementById('c-placeholder').style.display='none';
+}
+
+// ─── AGE ───
+function calcAge(){
+  const dob=new Date(document.getElementById('a-dob').value);
+  const asof=new Date(document.getElementById('a-asof').value||Date.now());
+  if(isNaN(dob)) return;
+  let y=asof.getFullYear()-dob.getFullYear();
+  let mo=asof.getMonth()-dob.getMonth();
+  let d=asof.getDate()-dob.getDate();
+  if(d<0){mo--;d+=new Date(asof.getFullYear(),asof.getMonth(),0).getDate();}
+  if(mo<0){y--;mo+=12;}
+  const totalDays=Math.floor((asof-dob)/(1000*60*60*24));
+  const totalWeeks=Math.floor(totalDays/7);
+  const totalMonths=y*12+mo;
+  const grid=document.getElementById('a-grid');
+  grid.innerHTML=`
+    <div class="age-card"><div class="age-card-num">${y}</div><div class="age-card-label">Years</div></div>
+    <div class="age-card"><div class="age-card-num">${mo}</div><div class="age-card-label">Months</div></div>
+    <div class="age-card"><div class="age-card-num">${d}</div><div class="age-card-label">Days</div></div>
+    <div class="age-card"><div class="age-card-num">${totalDays.toLocaleString()}</div><div class="age-card-label">Total Days</div></div>
+    <div class="age-card"><div class="age-card-num">${totalWeeks.toLocaleString()}</div><div class="age-card-label">Total Weeks</div></div>
+    <div class="age-card"><div class="age-card-num">${totalMonths.toLocaleString()}</div><div class="age-card-label">Total Months</div></div>
+  `;
+  const nextBirthday=new Date(asof.getFullYear(),dob.getMonth(),dob.getDate());
+  if(nextBirthday<=asof) nextBirthday.setFullYear(nextBirthday.getFullYear()+1);
+  const daysLeft=Math.ceil((nextBirthday-asof)/(1000*60*60*24));
+  document.getElementById('a-next').innerHTML=`<span class="age-next-label">Next birthday (age ${y+1})</span><span class="age-next-val">in ${daysLeft} day${daysLeft!==1?'s':''} — ${nextBirthday.toLocaleDateString('en-US',{month:'long',day:'numeric'})}</span>`;
+  document.getElementById('a-results').classList.remove('result-hidden');
+  document.getElementById('a-placeholder').style.display='none';
+}
+
+// ─── SQFT ───
+let sfShape='rect';
+function selectShape(s){
+  sfShape=s;
+  ['rect','circ','tri'].forEach(sh=>{
+    document.getElementById('sf-'+sh).classList.toggle('active',sh===s);
+    document.getElementById('sf-'+sh+'-fields').style.display=sh===s?'block':'none';
+  });
+}
+function calcSqft(){
+  let sqft=0;
+  if(sfShape==='rect') sqft=(+document.getElementById('sf-len').value||0)*(+document.getElementById('sf-wid').value||0);
+  else if(sfShape==='circ') sqft=Math.PI*Math.pow(+document.getElementById('sf-rad').value||0,2);
+  else if(sfShape==='tri') sqft=.5*(+document.getElementById('sf-base').value||0)*(+document.getElementById('sf-height').value||0);
+  const cost=+document.getElementById('sf-cost').value||0;
+  document.getElementById('sf-sqft-out').innerHTML=sqft.toFixed(2)+'<span class="unit">sq ft</span>';
+  document.getElementById('sf-sqm').textContent=(sqft*0.092903).toFixed(2)+' m²';
+  document.getElementById('sf-sqyd').textContent=(sqft/9).toFixed(2)+' yd²';
+  document.getElementById('sf-acres').textContent=(sqft/43560).toFixed(5);
+  const costRow=document.getElementById('sf-cost-row');
+  if(cost>0){costRow.style.display='flex';document.getElementById('sf-cost-out').textContent=fmtD(sqft*cost);}
+  else{costRow.style.display='none';}
+  document.getElementById('sf-results').classList.remove('result-hidden');
+  document.getElementById('sf-placeholder').style.display='none';
+}
+
+// ─── RECIPE ───
+const UNITS_TO_ML={cup:236.588,tbsp:14.787,tsp:4.929,ml:1,l:1000,fl_oz:29.574,g:1,kg:1000,oz:28.3495,lb:453.592};
+const UNIT_LABELS={cup:'Cup (US)',tbsp:'Tablespoon',tsp:'Teaspoon',ml:'Milliliter',l:'Liter',fl_oz:'Fl Oz',g:'Gram',kg:'Kilogram',oz:'Ounce',lb:'Pound'};
+function calcRecipe(){
+  const amt=+document.getElementById('r-amount').value||1;
+  const from=document.getElementById('r-from').value;
+  const baseVal=amt*UNITS_TO_ML[from];
+  const grid=document.getElementById('r-grid');
+  grid.innerHTML='';
+  Object.entries(UNITS_TO_ML).forEach(([unit,ml])=>{
+    if(unit===from) return;
+    const converted=(baseVal/ml);
+    const disp=converted>=100?converted.toFixed(0):converted>=10?converted.toFixed(1):converted.toFixed(3);
+    grid.innerHTML+=`<div class="recipe-result-card"><div class="recipe-from">${amt} ${UNIT_LABELS[from]}</div><div class="recipe-val">${disp}</div><div class="recipe-unit">${UNIT_LABELS[unit]}</div></div>`;
+  });
+  document.getElementById('r-results').classList.remove('result-hidden');
+  document.getElementById('r-placeholder').style.display='none';
+}
+
+// ─── TIMESTAMP ───
+function updateLiveTimestamp(){
+  const now=Math.floor(Date.now()/1000);
+  document.getElementById('ts-live-val').textContent=now+' ('+new Date().toUTCString()+')';
+}
+setInterval(updateLiveTimestamp,1000);
+updateLiveTimestamp();
+// Set default datetime input to now
+(function(){
+  const now=new Date();
+  now.setMinutes(now.getMinutes()-now.getTimezoneOffset());
+  document.getElementById('ts-dateinput').value=now.toISOString().slice(0,16);
+})();
+function epochToDate(){
+  const epoch=+document.getElementById('ts-epoch').value;
+  if(isNaN(epoch)) return;
+  const d=new Date(epoch*1000);
+  const out=document.getElementById('ts-date-out');
+  out.innerHTML=`<b>UTC:</b>  ${d.toUTCString()}\n<b>ISO:</b>  ${d.toISOString()}\n<b>Local:</b> ${d.toLocaleString()}\n<b>Unix:</b>  ${epoch}`;
+  out.classList.remove('result-hidden');
+  document.getElementById('ts-copy1').classList.remove('result-hidden');
+}
+function dateToEpoch(){
+  const val=document.getElementById('ts-dateinput').value;
+  if(!val) return;
+  const d=new Date(val);
+  const epoch=Math.floor(d.getTime()/1000);
+  const out=document.getElementById('ts-epoch-out');
+  out.innerHTML=`<b>Unix (s):</b>  ${epoch}\n<b>Unix (ms):</b> ${epoch*1000}\n<b>ISO:</b>      ${d.toISOString()}\n<b>UTC:</b>      ${d.toUTCString()}`;
+  out.classList.remove('result-hidden');
+  document.getElementById('ts-copy2').classList.remove('result-hidden');
+}
+function copyText(elId,btnId){
+  const el=document.getElementById(elId);
+  const text=el.innerText||el.value;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById(btnId);
+    btn.textContent='✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// ─── BASE64 ───
+function doBase64(mode){
+  const input=document.getElementById('b64-input').value;
+  const errEl=document.getElementById('b64-error');
+  errEl.style.display='none';
+  try{
+    document.getElementById('b64-output').value = mode==='encode'
+      ? btoa(unescape(encodeURIComponent(input)))
+      : decodeURIComponent(escape(atob(input)));
+  } catch(e){
+    errEl.style.display='block';
+    errEl.textContent=mode==='decode'?'Invalid Base64 string. Please check your input.':'Encoding failed.';
+    document.getElementById('b64-output').value='';
+  }
+}
+document.getElementById('b64-copy').addEventListener('click',function(){
+  const val=document.getElementById('b64-output').value;
+  navigator.clipboard.writeText(val).then(()=>{
+    this.textContent='✓ Copied!';this.classList.add('copied');
+    setTimeout(()=>{this.textContent='📋 Copy Result';this.classList.remove('copied');},2000);
+  });
+});
+
+// Auto-calc mortgage on load
+calcMortgage();
+
+// Sync rate inputs
+document.getElementById('m-rate').addEventListener('input',function(){
+  document.getElementById('m-rate-range').value=this.value;
+  document.getElementById('m-rate-display').textContent=parseFloat(this.value).toFixed(1)+'%';
+  calcMortgage();
+});
+document.getElementById('e-rate').addEventListener('input',function(){
+  document.getElementById('e-rate-range').value=this.value;
+  document.getElementById('e-rate-display').textContent=parseFloat(this.value).toFixed(1)+'%';
+  calcEMI();
+});
+</script>
+</body>
+</html>

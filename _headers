@@ -1,0 +1,14 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=3600
+
+/*.html
+  Cache-Control: public, max-age=3600
+
+/mortgage-calculator/*
+  Cache-Control: public, max-age=86400
+
+/calculators/*
+  Cache-Control: public, max-age=86400
