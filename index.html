@@ -145,21 +145,27 @@
     .hero {
       position: relative;
       z-index: 1;
-      padding: 160px 40px 100px;
+      padding: 80px 40px 24px;
       max-width: 1100px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
     }
+
+    .hero-text { flex: 1; }
 
     .hero-tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--accent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 8px;
       opacity: 0;
       animation: fadeUp 0.6s 0.1s ease forwards;
     }
@@ -172,12 +178,11 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(52px, 7vw, 86px);
+      font-size: clamp(26px, 3vw, 38px);
       font-weight: 500;
-      line-height: 1.08;
+      line-height: 1.1;
       letter-spacing: -0.03em;
       color: var(--text);
-      max-width: 720px;
       opacity: 0;
       animation: fadeUp 0.7s 0.2s ease forwards;
     }
@@ -188,12 +193,11 @@
     }
 
     .hero-sub {
-      margin-top: 24px;
-      font-size: 17px;
+      margin-top: 8px;
+      font-size: 13px;
       font-weight: 300;
       color: var(--text-mid);
-      line-height: 1.65;
-      max-width: 480px;
+      line-height: 1.5;
       opacity: 0;
       animation: fadeUp 0.7s 0.35s ease forwards;
     }
@@ -201,8 +205,8 @@
     .hero-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 44px;
+      gap: 12px;
+      margin-top: 16px;
       opacity: 0;
       animation: fadeUp 0.7s 0.5s ease forwards;
     }
@@ -210,13 +214,13 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       background: var(--accent);
       color: #080b10;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      padding: 14px 28px;
+      padding: 10px 20px;
       border-radius: 6px;
       text-decoration: none;
       transition: all 0.2s;
@@ -256,7 +260,7 @@
     }
 
     .stat {
-      padding: 32px 40px;
+      padding: 12px 24px;
       border-right: 1px solid var(--border);
     }
 
@@ -264,7 +268,7 @@
 
     .stat-num {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 32px;
+      font-size: 20px;
       font-weight: 500;
       color: var(--text);
       letter-spacing: -0.03em;
@@ -276,8 +280,8 @@
     }
 
     .stat-label {
-      margin-top: 6px;
-      font-size: 12px;
+      margin-top: 3px;
+      font-size: 11px;
       font-weight: 400;
       color: var(--text-dim);
       letter-spacing: 0.04em;
@@ -625,7 +629,7 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .hero { padding: 120px 20px 60px; }
+      .hero { padding: 72px 20px 20px; flex-direction: column; align-items: flex-start; gap: 0; }
       .stats-strip { grid-template-columns: repeat(2, 1fr); }
       .stat { border-right: none; border-bottom: 1px solid var(--border); }
       section { padding: 60px 20px; }
@@ -654,21 +658,20 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">Precision tools for everyone</div>
-    <h1>Calculate anything,<br /><em>instantly.</em></h1>
-    <p class="hero-sub">
-      Free, fast, and privacy-first utility tools — no sign-up, no ads on results, no data stored.
-      Built for people who just need the answer.
-    </p>
-    <div class="hero-actions">
-      <a href="#tools" class="btn-primary">
-        Browse Tools
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#080b10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#about" class="btn-secondary">
-        Why trust us
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#8a97ab" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <div class="hero-text">
+      <div class="hero-tag">Precision tools for everyone</div>
+      <h1>Calculate anything, <em>instantly.</em></h1>
+      <p class="hero-sub">Free, fast, privacy-first tools — no sign-up, no data stored.</p>
+      <div class="hero-actions">
+        <a href="#tools" class="btn-primary">
+          Browse Tools
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#080b10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#about" class="btn-secondary">
+          Why trust us
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#8a97ab" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -696,13 +699,7 @@
 
   <!-- TOOLS -->
   <section id="tools">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">// tool_categories</div>
-        <h2>Everything you need,<br />nothing you don't.</h2>
-      </div>
-      <a href="#" class="section-link">View all tools →</a>
-    </div>
+  
 
     <div class="search-wrap reveal">
       <span class="search-icon">⌕</span>
