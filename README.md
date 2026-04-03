@@ -31,3 +31,4 @@ These URLs will work out of the box on Cloudflare Pages:
 - [ ] Submit sitemap.xml to Google Search Console
 # mathtools
 # mathtools
+# mathtools
