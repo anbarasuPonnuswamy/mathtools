@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calcify — Free Utility Tools</title>
+  <title>mymathtools — Free Utility Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -421,6 +421,9 @@
     .badge-new   { background: rgba(52,201,124,0.12); color: var(--green); border: 1px solid rgba(52,201,124,0.25); }
     .badge-pop   { background: rgba(232,160,32,0.12); color: var(--accent); border: 1px solid rgba(232,160,32,0.3); }
     .badge-dev   { background: rgba(74,158,255,0.12); color: var(--blue); border: 1px solid rgba(74,158,255,0.25); }
+    .badge-soon  { background: rgba(74,85,104,0.2); color: var(--text-dim); border: 1px solid rgba(74,85,104,0.3); }
+
+    .tool-card.coming-soon { cursor: default; pointer-events: none; opacity: 0.55; }
 
     /* ─── TRUST ROW ─── */
     .trust-row {
@@ -639,7 +642,7 @@
   <nav>
     <a href="#" class="logo">
       <span class="logo-dot"></span>
-      Calcify
+      mymathtools
     </a>
     <ul class="nav-links">
       <li><a href="#tools">Tools</a></li>
@@ -708,7 +711,7 @@
 
     <div class="tool-grid" id="toolGrid">
 
-      <a class="tool-card" href="#">
+      <a class="tool-card" href="/mortgage-calculator">
         <div class="tool-icon ic-amber">🏠</div>
         <div class="tool-card-title">
           Mortgage Calculator
@@ -718,84 +721,60 @@
         <div class="tool-badge badge-pop">Most Popular</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-green">❤️</div>
-        <div class="tool-card-title">
-          BMI Calculator
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">BMI Calculator</div>
         <div class="tool-desc">Body Mass Index with healthy weight range by height. Metric and imperial supported.</div>
-        <div class="tool-badge badge-pop">Trending</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-blue">💵</div>
-        <div class="tool-card-title">
-          Tax Estimator
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Tax Estimator</div>
         <div class="tool-desc">Federal income tax estimate for 2025-26 with bracket breakdown and effective rate.</div>
-        <div class="tool-badge badge-new">Updated 2026</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-coral">⏱️</div>
-        <div class="tool-card-title">
-          Unix Timestamp
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Unix Timestamp</div>
         <div class="tool-desc">Convert epoch to human-readable date or any date to Unix timestamp in one click.</div>
-        <div class="tool-badge badge-dev">Dev Tool</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-purple">📐</div>
-        <div class="tool-card-title">
-          Square Footage
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Square Footage</div>
         <div class="tool-desc">Calculate room or project area for flooring, paint, tile, or landscaping instantly.</div>
-        <div class="tool-badge badge-new">New</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-teal">🍳</div>
-        <div class="tool-card-title">
-          Recipe Converter
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Recipe Converter</div>
         <div class="tool-desc">Grams to cups, ml to tbsp, and every cooking unit conversion you'll ever need.</div>
-        <div class="tool-badge badge-pop">Popular</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-amber">🎂</div>
-        <div class="tool-card-title">
-          Age Calculator
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Age Calculator</div>
         <div class="tool-desc">Exact age in years, months, and days. Also calculates date differences and countdowns.</div>
-        <div class="tool-badge badge-pop">Popular</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-blue">🔐</div>
-        <div class="tool-card-title">
-          Base64 Encoder
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">Base64 Encoder</div>
         <div class="tool-desc">Encode or decode Base64 strings in your browser — nothing ever leaves your device.</div>
-        <div class="tool-badge badge-dev">Dev Tool</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
-      <a class="tool-card" href="#">
+      <a class="tool-card coming-soon" href="#">
         <div class="tool-icon ic-green">💰</div>
-        <div class="tool-card-title">
-          EMI Calculator
-          <span class="tool-arrow">↗</span>
-        </div>
+        <div class="tool-card-title">EMI Calculator</div>
         <div class="tool-desc">Monthly loan instalments with full amortization table. Works for home, auto, or personal loans.</div>
-        <div class="tool-badge badge-new">New</div>
+        <div class="tool-badge badge-soon">Coming Soon</div>
       </a>
 
     </div>
@@ -807,7 +786,7 @@
   <section id="about">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// why_calcify</div>
+        <div class="section-tag">// why_mymathtools</div>
         <h2>Built to earn trust,<br />not chase clicks.</h2>
       </div>
     </div>
@@ -834,7 +813,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-brand">Calcify</div>
+        <div class="footer-brand">mymathtools</div>
         <div class="footer-tagline">Precision utility tools for the web.<br />Free forever. No account. No tracking.</div>
       </div>
       <div class="footer-col">
@@ -869,7 +848,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Calcify — No cookies, no tracking, no nonsense.</div>
+      <div class="footer-copy">© 2026 mymathtools — No cookies, no tracking, no nonsense.</div>
       <div class="footer-status">
         <span class="status-dot"></span>
         All systems operational

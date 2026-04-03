@@ -30,3 +30,4 @@ These URLs will work out of the box on Cloudflare Pages:
 - [ ] Add Google Analytics or Cloudflare Web Analytics snippet
 - [ ] Submit sitemap.xml to Google Search Console
 # mathtools
+# mathtools
