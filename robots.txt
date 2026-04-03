@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yourcalcsite.com/sitemap.xml
+Sitemap: https://mymathtools.com/sitemap.xml
