@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Percentage Calculator — Free Online | MyMathTools</title>
+<meta name="description" content="Free, instant percentage calculator — what is X% of Y, percentage change, increase/decrease. Runs in your browser, no sign-up, no data stored."/>
+<link rel="canonical" href="https://mymathtools.com/percentage-calculator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Percentage Calculator — Free Online | MyMathTools"/>
+<meta property="og:description" content="Free, instant percentage calculator. Runs in your browser, no sign-up, no data stored."/>
+<meta property="og:url" content="https://mymathtools.com/percentage-calculator"/>
+<meta property="og:site_name" content="MyMathTools"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Percentage Calculator",
+  "url": "https://mymathtools.com/percentage-calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "description": "Calculate percentages, percentage change, percentage of a value, and reverse percentage."
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;
+  --border:#1c2230;--border2:#252f40;
+  --accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--accent-glow:rgba(232,160,32,.22);
+  --text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;
+  --green:#34c97c;--blue:#4a9eff;--coral:#ff6b6b;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;letter-spacing:.06em;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+.field-group:last-child{margin-bottom:0;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.result-card{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:24px;}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-mid);}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--text);font-weight:500;}
+.result-value.accent{color:var(--accent);}
+.formula-box{margin-top:20px;background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:16px;}
+.formula-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.formula-text{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);line-height:1.6;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// arithmetic.percentage_calculator</div>
+  <h1>Percentage <em>Calculator</em></h1>
+  <p class="page-desc">Calculate percentages, percentage change, percentage of a value, and reverse percentage — instantly in your browser.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Inputs</div>
+      <div class="field-group">
+        <label for="mode">Calculation Mode</label>
+        <select id="mode">
+          <option value="pct_of">What is X% of Y?</option>
+          <option value="x_of_y">X is what % of Y?</option>
+          <option value="change">Percentage change from X to Y</option>
+          <option value="inc_dec">Increase / Decrease X by Y%</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="valueA" id="labelA">X value</label>
+        <input type="number" id="valueA" placeholder="Enter X" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="valueB" id="labelB">Y value</label>
+        <input type="number" id="valueB" placeholder="Enter Y" step="any"/>
+      </div>
+    </div>
+
+    <div>
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-label">Result</span>
+          <span class="result-value accent" id="out-result">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Formula used</span>
+          <span class="result-value" id="out-formula" style="font-size:12px;text-align:right;max-width:60%;">—</span>
+        </div>
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">How it works</div>
+        <div class="formula-text" id="formula-explain">Select a mode and enter values above.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const modeEl = document.getElementById('mode');
+const aEl = document.getElementById('valueA');
+const bEl = document.getElementById('valueB');
+const labelA = document.getElementById('labelA');
+const labelB = document.getElementById('labelB');
+const outResult = document.getElementById('out-result');
+const outFormula = document.getElementById('out-formula');
+const formulaExplain = document.getElementById('formula-explain');
+
+const modes = {
+  pct_of:  { a: 'Percentage (X %)', b: 'Of value (Y)', explain: 'Result = (X / 100) × Y' },
+  x_of_y:  { a: 'Part value (X)', b: 'Whole value (Y)', explain: 'Result = (X / Y) × 100' },
+  change:  { a: 'Original value (X)', b: 'New value (Y)', explain: 'Result = ((Y − X) / |X|) × 100' },
+  inc_dec: { a: 'Starting value (X)', b: 'Percentage (Y %)', explain: 'Result = X × (1 + Y/100)' }
+};
+
+function fmt(n) {
+  if (!isFinite(n)) return '—';
+  return Number(n.toFixed(6)).toString();
+}
+
+function calculate() {
+  const mode = modeEl.value;
+  const m = modes[mode];
+  labelA.textContent = m.a;
+  labelB.textContent = m.b;
+  formulaExplain.textContent = m.explain;
+
+  const a = parseFloat(aEl.value);
+  const b = parseFloat(bEl.value);
+
+  if (isNaN(a) || isNaN(b)) { outResult.textContent = '—'; outFormula.textContent = '—'; return; }
+
+  let result, formula;
+  if (mode === 'pct_of') {
+    result = (a / 100) * b;
+    formula = `(${a} / 100) × ${b}`;
+  } else if (mode === 'x_of_y') {
+    if (b === 0) { outResult.textContent = '∞'; outFormula.textContent = 'Division by zero'; return; }
+    result = (a / b) * 100;
+    formula = `(${a} / ${b}) × 100`;
+  } else if (mode === 'change') {
+    if (a === 0) { outResult.textContent = '∞'; outFormula.textContent = 'Division by zero'; return; }
+    result = ((b - a) / Math.abs(a)) * 100;
+    formula = `((${b} − ${a}) / |${a}|) × 100`;
+  } else {
+    result = a * (1 + b / 100);
+    formula = `${a} × (1 + ${b}/100)`;
+  }
+
+  const suffix = (mode === 'pct_of' || mode === 'inc_dec') ? '' : '%';
+  outResult.textContent = fmt(result) + suffix;
+  outFormula.textContent = formula + ' = ' + fmt(result) + suffix;
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+calculate();
+</script>
+</body>
+</html>

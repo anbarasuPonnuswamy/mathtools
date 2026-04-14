@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fibonacci Number Generator — Free Online | MyMathTools</title>
+<meta name="description" content="Generate the first N Fibonacci numbers and check if any number is in the Fibonacci sequence. Free, instant, no sign-up required."/>
+<link rel="canonical" href="https://mymathtools.com/fibonacci-generator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Fibonacci Number Generator","url":"https://mymathtools.com/fibonacci-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;--purple:#a78bfa;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:320px 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.check-result{padding:16px;border-radius:8px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:14px;text-align:center;}
+.check-result.yes{background:rgba(52,201,124,.08);border:1px solid rgba(52,201,124,.3);color:var(--green);}
+.check-result.no{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.3);color:#ff6b6b;}
+.check-result.empty{background:var(--surface2);border:1px solid var(--border2);color:var(--text-dim);}
+.btn{padding:10px 18px;background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);border-radius:7px;font-size:13px;cursor:pointer;transition:all .2s;margin-top:12px;}
+.btn:hover{background:var(--surface3);color:var(--text);}
+.table-wrap{overflow:auto;max-height:420px;border:1px solid var(--border);border-radius:8px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead{position:sticky;top:0;background:var(--surface);}
+th{padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.1em;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);border-bottom:1px solid var(--border);}
+td:last-child{color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--surface2);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// sequences.fibonacci_generator</div>
+  <h1>Fibonacci Number <em>Generator</em></h1>
+  <p class="page-desc">Generate the first N Fibonacci numbers and check if any number belongs to the Fibonacci sequence.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Inputs</div>
+      <div class="field-group">
+        <label for="count">How many terms (max 78)</label>
+        <input type="number" id="count" value="10" min="1" max="78" step="1"/>
+      </div>
+      <div class="field-group">
+        <label for="check">Check if a number is Fibonacci</label>
+        <input type="number" id="check" placeholder="Optional — enter any number" step="1" min="0"/>
+        <div class="check-result empty" id="check-result">Enter a number above to check</div>
+      </div>
+      <button class="btn" onclick="copyList()">Copy List</button>
+    </div>
+
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Index (n)</th><th>F(n)</th><th>Ratio F(n)/F(n-1)</th></tr>
+          </thead>
+          <tbody id="fib-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let fibList = [];
+
+function isFibonacci(n) {
+  // A number is Fibonacci if 5n²+4 or 5n²-4 is a perfect square
+  function isPerfectSquare(x) { const s = Math.round(Math.sqrt(x)); return s * s === x; }
+  return isPerfectSquare(5 * n * n + 4) || isPerfectSquare(5 * n * n - 4);
+}
+
+function calculate() {
+  const count = Math.min(78, Math.max(1, parseInt(document.getElementById('count').value) || 10));
+  const fibs = [0, 1];
+  while (fibs.length < count) fibs.push(fibs[fibs.length - 1] + fibs[fibs.length - 2]);
+  fibList = fibs.slice(0, count);
+
+  document.getElementById('fib-table').innerHTML = fibList.map((f, i) => {
+    const ratio = i > 1 ? (f / fibList[i - 1]).toFixed(6) : '—';
+    return `<tr><td>${i}</td><td>${f.toLocaleString()}</td><td>${ratio}</td></tr>`;
+  }).join('');
+
+  checkNumber();
+}
+
+function checkNumber() {
+  const val = document.getElementById('check').value.trim();
+  const box = document.getElementById('check-result');
+  if (!val) { box.className = 'check-result empty'; box.textContent = 'Enter a number above to check'; return; }
+  const n = parseInt(val);
+  if (isNaN(n) || n < 0) { box.className = 'check-result no'; box.textContent = 'Invalid input'; return; }
+  const result = isFibonacci(n);
+  box.className = 'check-result ' + (result ? 'yes' : 'no');
+  box.textContent = result ? `✓ ${n} IS a Fibonacci number` : `✗ ${n} is NOT a Fibonacci number`;
+}
+
+function copyList() {
+  navigator.clipboard.writeText(fibList.join(', ')).then(() => {
+    const btn = document.querySelector('.btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy List', 2000);
+  });
+}
+
+document.getElementById('count').addEventListener('input', calculate);
+document.getElementById('check').addEventListener('input', checkNumber);
+calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Random Number Generator — Free Online | MyMathTools</title>
+<meta name="description" content="Generate random numbers between any range — integers or decimals, single or multiple, with no-duplicates option. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/random-number-generator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Random Number Generator","url":"https://mymathtools.com/random-number-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--accent-glow:rgba(232,160,32,.22);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.checkbox-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.checkbox-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;}
+.checkbox-row label{margin:0;text-transform:none;font-size:13px;letter-spacing:0;cursor:pointer;}
+.btn-generate{width:100%;padding:14px;background:var(--accent);color:#080b10;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:8px;}
+.btn-generate:hover{background:#f0b429;box-shadow:0 6px 24px var(--accent-glow);}
+.result-hero{text-align:center;padding:32px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;margin-bottom:16px;position:relative;overflow:hidden;}
+.result-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--accent-glow),transparent 70%);pointer-events:none;}
+.rh-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
+.rh-numbers{font-family:'JetBrains Mono',monospace;font-size:28px;color:var(--accent);word-break:break-all;line-height:1.4;}
+.btn-copy{width:100%;padding:11px;background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;}
+.btn-copy:hover{background:var(--surface3);color:var(--text);}
+.error-msg{font-size:12px;color:#ff6b6b;margin-top:8px;min-height:18px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// utility.random_number_generator</div>
+  <h1>Random Number <em>Generator</em></h1>
+  <p class="page-desc">Generate one or many random numbers within any range — integers or decimals, with optional no-duplicates enforcement.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Settings</div>
+      <div class="field-group">
+        <label for="min">Minimum Value</label>
+        <input type="number" id="min" value="1" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="max">Maximum Value</label>
+        <input type="number" id="max" value="100" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="count">How Many Numbers</label>
+        <input type="number" id="count" value="1" min="1" max="1000" step="1"/>
+      </div>
+      <div class="field-group">
+        <label for="decimals">Decimal Places</label>
+        <select id="decimals">
+          <option value="0" selected>0 — Integer</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="unique"/>
+        <label for="unique">No duplicates</label>
+      </div>
+      <button class="btn-generate" onclick="generate()">🎲 Generate</button>
+      <div class="error-msg" id="error-msg"></div>
+    </div>
+
+    <div>
+      <div class="result-hero">
+        <div class="rh-label">Generated Numbers</div>
+        <div class="rh-numbers" id="out-numbers">Click Generate</div>
+      </div>
+      <button class="btn-copy" onclick="copyNumbers()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let lastNumbers = [];
+
+function generate() {
+  const min = parseFloat(document.getElementById('min').value);
+  const max = parseFloat(document.getElementById('max').value);
+  const count = parseInt(document.getElementById('count').value) || 1;
+  const decimals = parseInt(document.getElementById('decimals').value);
+  const unique = document.getElementById('unique').checked;
+  const errEl = document.getElementById('error-msg');
+
+  errEl.textContent = '';
+  if (isNaN(min) || isNaN(max) || min >= max) { errEl.textContent = 'Min must be less than Max'; return; }
+
+  const range = decimals === 0 ? (max - min + 1) : Infinity;
+  if (unique && decimals === 0 && count > range) {
+    errEl.textContent = `Cannot generate ${count} unique integers in range [${min}, ${max}]`;
+    return;
+  }
+
+  const nums = [];
+  const used = new Set();
+  let attempts = 0;
+
+  while (nums.length < count && attempts < 100000) {
+    attempts++;
+    let n = Math.random() * (max - min) + min;
+    if (decimals === 0) n = Math.floor(n);
+    else n = parseFloat(n.toFixed(decimals));
+    if (unique && used.has(n)) continue;
+    used.add(n);
+    nums.push(n);
+  }
+
+  lastNumbers = nums;
+  document.getElementById('out-numbers').textContent = nums.join(count > 1 ? ',  ' : '');
+}
+
+function copyNumbers() {
+  if (!lastNumbers.length) return;
+  navigator.clipboard.writeText(lastNumbers.join(', ')).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+  });
+}
+</script>
+</body>
+</html>

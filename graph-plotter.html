@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Function Graph Plotter — Free Online | MyMathTools</title>
+<meta name="description" content="Plot y = f(x) mathematical functions in your browser. Supports multiple functions, zoom, pan, download as PNG, and coordinate hover. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/graph-plotter"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Function Graph Plotter","url":"https://mymathtools.com/graph-plotter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Plot y = f(x) mathematical functions with zoom, pan, and multiple function support."}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;--coral:#ff6b6b;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:300px 1fr;gap:24px;margin-top:40px;align-items:start;}
+@media(max-width:900px){.tool-layout{grid-template-columns:1fr;}}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.panel-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;}
+.fn-row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+.fn-row input[type=text]{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);outline:none;transition:border-color .2s;}
+.fn-row input[type=text]:focus{border-color:var(--accent);}
+.fn-row input[type=color]{width:36px;height:36px;border:1px solid var(--border2);border-radius:6px;background:none;cursor:pointer;padding:2px;}
+.fn-row .del-btn{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;padding:4px 6px;transition:color .2s;}
+.fn-row .del-btn:hover{color:var(--coral);}
+.add-btn{width:100%;padding:9px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;color:var(--text-mid);font-size:13px;cursor:pointer;transition:all .2s;margin-bottom:16px;}
+.add-btn:hover{background:var(--surface3);color:var(--text);}
+.range-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+label{display:block;font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:.04em;text-transform:uppercase;margin-bottom:5px;}
+input[type=number]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:9px 10px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);outline:none;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input[type=number]:focus{border-color:var(--accent);}
+.action-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.btn{padding:9px 14px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;color:var(--text-mid);font-size:12px;cursor:pointer;transition:all .2s;}
+.btn:hover{background:var(--surface3);color:var(--text);}
+.btn.primary{background:var(--accent);color:#080b10;border-color:var(--accent);}
+.btn.primary:hover{background:#f0b429;}
+.canvas-wrap{position:relative;background:var(--surface2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+canvas{display:block;width:100%;cursor:crosshair;}
+.coord-tooltip{position:absolute;top:12px;right:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-mid);background:rgba(8,11,16,.85);border:1px solid var(--border);border-radius:5px;padding:5px 10px;pointer-events:none;}
+.error-list{margin-top:12px;}
+.error-item{font-size:12px;color:var(--coral);padding:4px 0;}
+.hint{font-size:11px;color:var(--text-dim);margin-top:12px;line-height:1.6;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// graphing.graph_plotter</div>
+  <h1>Function Graph <em>Plotter</em></h1>
+  <p class="page-desc">Plot y = f(x) functions in your browser. Add multiple functions, zoom with scroll, pan by dragging, and download as PNG.</p>
+
+  <div class="tool-layout">
+    <div>
+      <div class="panel">
+        <div class="panel-label">Functions</div>
+        <div id="fn-list"></div>
+        <button class="add-btn" onclick="addFunction()">+ Add Function</button>
+
+        <div class="panel-label">X Range</div>
+        <div class="range-row">
+          <div><label>x min</label><input type="number" id="xMin" value="-10" step="1"/></div>
+          <div><label>x max</label><input type="number" id="xMax" value="10" step="1"/></div>
+        </div>
+
+        <div class="action-btns">
+          <button class="btn primary" onclick="plot()">Plot</button>
+          <button class="btn" onclick="resetView()">Reset</button>
+          <button class="btn" onclick="downloadPNG()">↓ PNG</button>
+        </div>
+
+        <div class="error-list" id="error-list"></div>
+
+        <div class="hint">
+          <strong>Supported:</strong> x, sin(x), cos(x), tan(x), sqrt(x), abs(x), log(x), exp(x), PI, E, x**2, x^2<br/>
+          <strong>Zoom:</strong> scroll wheel &nbsp; <strong>Pan:</strong> click &amp; drag
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="canvas-wrap">
+        <canvas id="graph" height="520"></canvas>
+        <div class="coord-tooltip" id="coord-tooltip">x: — &nbsp; y: —</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS = ['#e8a020','#4a9eff','#34c97c','#ff6b6b','#a78bfa','#2dd4bf'];
+let functions = [];
+let view = { xMin: -10, xMax: 10, yMin: -8, yMax: 8 };
+let dragging = false, dragStart = null, viewStart = null;
+
+function addFunction(expr = '', color = null) {
+  const id = Date.now();
+  const c = color || COLORS[functions.length % COLORS.length];
+  functions.push({ id, expr, color: c });
+  renderFnList();
+}
+
+function renderFnList() {
+  const list = document.getElementById('fn-list');
+  list.innerHTML = functions.map((fn, i) => `
+    <div class="fn-row">
+      <input type="text" value="${fn.expr}" placeholder="e.g. sin(x)*x" oninput="updateFn(${fn.id}, this.value)" onkeydown="if(event.key==='Enter')plot()"/>
+      <input type="color" value="${fn.color}" oninput="updateColor(${fn.id}, this.value)"/>
+      <button class="del-btn" onclick="removeFn(${fn.id})">✕</button>
+    </div>`).join('');
+}
+
+function updateFn(id, val) { const f = functions.find(f => f.id === id); if (f) f.expr = val; }
+function updateColor(id, val) { const f = functions.find(f => f.id === id); if (f) { f.color = val; plot(); } }
+function removeFn(id) { functions = functions.filter(f => f.id !== id); renderFnList(); plot(); }
+
+function safeEval(expr, x) {
+  const clean = expr
+    .replace(/\^/g, '**')
+    .replace(/\bsin\b/g, 'Math.sin')
+    .replace(/\bcos\b/g, 'Math.cos')
+    .replace(/\btan\b/g, 'Math.tan')
+    .replace(/\basin\b/g, 'Math.asin')
+    .replace(/\bacos\b/g, 'Math.acos')
+    .replace(/\batan\b/g, 'Math.atan')
+    .replace(/\bsqrt\b/g, 'Math.sqrt')
+    .replace(/\babs\b/g, 'Math.abs')
+    .replace(/\blog\b/g, 'Math.log10')
+    .replace(/\bln\b/g, 'Math.log')
+    .replace(/\bexp\b/g, 'Math.exp')
+    .replace(/\bPI\b/g, 'Math.PI')
+    .replace(/\bE\b/g, 'Math.E');
+  // eslint-disable-next-line no-new-func
+  return Function('x', '"use strict"; return (' + clean + ')')(x);
+}
+
+function plot() {
+  const xMin = parseFloat(document.getElementById('xMin').value);
+  const xMax = parseFloat(document.getElementById('xMax').value);
+  if (!isNaN(xMin) && !isNaN(xMax) && xMin < xMax) {
+    view.xMin = xMin; view.xMax = xMax;
+    const aspect = (view.yMax - view.yMin) / (view.xMax - view.xMin);
+    const mid = (view.yMin + view.yMax) / 2;
+    const half = (xMax - xMin) * aspect / 2;
+    view.yMin = mid - half; view.yMax = mid + half;
+  }
+  draw();
+}
+
+function draw() {
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  const W = canvas.width, H = canvas.height;
+  const { xMin, xMax, yMin, yMax } = view;
+
+  const toCanvasX = x => ((x - xMin) / (xMax - xMin)) * W;
+  const toCanvasY = y => H - ((y - yMin) / (yMax - yMin)) * H;
+
+  ctx.fillStyle = '#0e1219';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  const xStep = niceStep((xMax - xMin) / 10);
+  const yStep = niceStep((yMax - yMin) / 8);
+
+  ctx.strokeStyle = 'rgba(28,34,48,0.9)'; ctx.lineWidth = 1;
+  for (let x = Math.ceil(xMin / xStep) * xStep; x <= xMax; x += xStep) {
+    const cx = toCanvasX(x);
+    ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
+    ctx.fillStyle = 'rgba(74,85,104,0.7)'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
+    ctx.fillText(parseFloat(x.toFixed(4)), cx, H - 4);
+  }
+  for (let y = Math.ceil(yMin / yStep) * yStep; y <= yMax; y += yStep) {
+    const cy = toCanvasY(y);
+    ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+    ctx.fillStyle = 'rgba(74,85,104,0.7)'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'right';
+    ctx.fillText(parseFloat(y.toFixed(4)), 38, cy - 3);
+  }
+
+  // Axes
+  ctx.strokeStyle = 'rgba(74,85,104,0.6)'; ctx.lineWidth = 1.5;
+  const x0 = toCanvasX(0), y0 = toCanvasY(0);
+  if (x0 >= 0 && x0 <= W) { ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x0, H); ctx.stroke(); }
+  if (y0 >= 0 && y0 <= H) { ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke(); }
+
+  // Functions
+  const errors = [];
+  functions.forEach(fn => {
+    if (!fn.expr.trim()) return;
+    ctx.strokeStyle = fn.color; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let started = false, prevValid = false;
+    for (let px = 0; px <= W; px++) {
+      const x = xMin + (px / W) * (xMax - xMin);
+      let y;
+      try { y = safeEval(fn.expr, x); } catch { y = NaN; }
+      if (!isFinite(y) || isNaN(y)) { prevValid = false; continue; }
+      const cy = toCanvasY(y);
+      if (!started || !prevValid) { ctx.moveTo(px, cy); started = true; }
+      else ctx.lineTo(px, cy);
+      prevValid = true;
+    }
+    ctx.stroke();
+    try { safeEval(fn.expr, 0); } catch(e) { errors.push(`"${fn.expr}": ${e.message}`); }
+  });
+
+  document.getElementById('error-list').innerHTML = errors.map(e => `<div class="error-item">⚠ ${e}</div>`).join('');
+}
+
+function niceStep(rough) {
+  const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+  const frac = rough / pow;
+  if (frac < 1.5) return pow;
+  if (frac < 3.5) return 2 * pow;
+  if (frac < 7.5) return 5 * pow;
+  return 10 * pow;
+}
+
+function resetView() {
+  view = { xMin: -10, xMax: 10, yMin: -8, yMax: 8 };
+  document.getElementById('xMin').value = -10;
+  document.getElementById('xMax').value = 10;
+  draw();
+}
+
+function downloadPNG() {
+  const canvas = document.getElementById('graph');
+  const a = document.createElement('a');
+  a.download = 'graph.png';
+  a.href = canvas.toDataURL();
+  a.click();
+}
+
+// Zoom
+document.getElementById('graph').addEventListener('wheel', e => {
+  e.preventDefault();
+  const factor = e.deltaY > 0 ? 1.15 : 0.87;
+  const cx = (view.xMin + view.xMax) / 2, cy = (view.yMin + view.yMax) / 2;
+  const hw = (view.xMax - view.xMin) / 2 * factor, hh = (view.yMax - view.yMin) / 2 * factor;
+  view = { xMin: cx - hw, xMax: cx + hw, yMin: cy - hh, yMax: cy + hh };
+  draw();
+}, { passive: false });
+
+// Pan
+const canvas = document.getElementById('graph');
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  dragStart = { x: e.clientX, y: e.clientY };
+  viewStart = { ...view };
+});
+window.addEventListener('mousemove', e => {
+  if (!dragging) {
+    // Coordinate tooltip
+    const rect = canvas.getBoundingClientRect();
+    const px = e.clientX - rect.left, py = e.clientY - rect.top;
+    const x = view.xMin + (px / canvas.offsetWidth) * (view.xMax - view.xMin);
+    const y = view.yMin + (1 - py / canvas.height) * (view.yMax - view.yMin);
+    document.getElementById('coord-tooltip').textContent = `x: ${x.toFixed(3)}  y: ${y.toFixed(3)}`;
+    return;
+  }
+  const dx = (e.clientX - dragStart.x) / canvas.offsetWidth * (view.xMax - view.xMin);
+  const dy = (e.clientY - dragStart.y) / canvas.height * (view.yMax - view.yMin);
+  view.xMin = viewStart.xMin - dx; view.xMax = viewStart.xMax - dx;
+  view.yMin = viewStart.yMin + dy; view.yMax = viewStart.yMax + dy;
+  draw();
+});
+window.addEventListener('mouseup', () => { dragging = false; });
+
+window.addEventListener('resize', draw);
+
+// Init
+addFunction('sin(x)');
+addFunction('x**2 / 10', COLORS[1]);
+plot();
+</script>
+</body>
+</html>

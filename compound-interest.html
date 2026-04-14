@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Compound Interest Calculator — Free Online | MyMathTools</title>
+<meta name="description" content="Free compound interest calculator with year-by-year table and growth chart. Supports regular contributions. Runs in your browser, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/compound-interest"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Compound Interest Calculator — Free Online | MyMathTools"/>
+<meta property="og:description" content="Free compound interest calculator with year-by-year breakdown and bar chart."/>
+<meta property="og:url" content="https://mymathtools.com/compound-interest"/>
+<meta property="og:site_name" content="MyMathTools"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Compound Interest Calculator",
+  "url": "https://mymathtools.com/compound-interest",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "description": "Calculate compound interest growth with customizable principal, rate, time, and compounding frequency."
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--accent-glow:rgba(232,160,32,.22);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;--coral:#ff6b6b;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;letter-spacing:.06em;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:380px 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:900px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+.input-wrap{position:relative;}
+.pfx{position:absolute;top:50%;transform:translateY(-50%);left:13px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);pointer-events:none;}
+.sfx{position:absolute;top:50%;transform:translateY(-50%);right:13px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);pointer-events:none;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.has-pfx{padding-left:28px;}.has-sfx{padding-right:36px;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:16px;}
+.sc-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;}
+.sc-val{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);font-weight:500;}
+.sc-val.accent{color:var(--accent);}
+.sc-val.green{color:var(--green);}
+.sc-val.coral{color:var(--coral);}
+canvas{width:100%;border-radius:8px;display:block;}
+.table-wrap{overflow:auto;max-height:300px;border:1px solid var(--border);border-radius:8px;margin-top:16px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead{position:sticky;top:0;background:var(--surface);}
+th{padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.1em;text-align:right;border-bottom:1px solid var(--border);}
+th:first-child{text-align:left;}
+td{padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-mid);text-align:right;border-bottom:1px solid var(--border);}
+td:first-child{text-align:left;color:var(--text-dim);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--surface2);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// finance.compound_interest</div>
+  <h1>Compound Interest <em>Calculator</em></h1>
+  <p class="page-desc">Calculate compound interest growth with customizable principal, rate, time, and compounding frequency. Includes year-by-year table and bar chart.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Inputs</div>
+      <div class="field-group">
+        <label for="principal">Principal Amount</label>
+        <div class="input-wrap">
+          <span class="pfx">$</span>
+          <input type="number" id="principal" class="has-pfx" value="10000" min="0" step="100"/>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="rate">Annual Interest Rate</label>
+        <div class="input-wrap">
+          <input type="number" id="rate" class="has-sfx" value="7" step="0.1" min="0"/>
+          <span class="sfx">%</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="years">Time Period (Years)</label>
+        <input type="number" id="years" value="10" min="1" max="100" step="1"/>
+      </div>
+      <div class="field-group">
+        <label for="frequency">Compounding Frequency</label>
+        <select id="frequency">
+          <option value="1">Annually</option>
+          <option value="2">Semi-annually</option>
+          <option value="4">Quarterly</option>
+          <option value="12" selected>Monthly</option>
+          <option value="365">Daily</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="contribution">Regular Contribution (per period)</label>
+        <div class="input-wrap">
+          <span class="pfx">$</span>
+          <input type="number" id="contribution" class="has-pfx" value="0" min="0" step="10"/>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="sc-label">Final Balance</div>
+          <div class="sc-val accent" id="out-balance">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Total Interest</div>
+          <div class="sc-val green" id="out-interest">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Total Contributions</div>
+          <div class="sc-val" id="out-contributions">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Growth Multiple</div>
+          <div class="sc-val coral" id="out-multiple">—</div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:20px;">
+        <div class="card-label" style="margin-bottom:12px;">Growth Chart</div>
+        <canvas id="chart" height="200"></canvas>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;">Year</th>
+              <th>Balance</th>
+              <th>Interest</th>
+              <th>Contributions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const fmtC = v => '$' + Math.round(v).toLocaleString('en-US');
+const fmtF = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+function calculate() {
+  const P = parseFloat(document.getElementById('principal').value) || 0;
+  const r = parseFloat(document.getElementById('rate').value) / 100;
+  const t = parseInt(document.getElementById('years').value) || 1;
+  const n = parseInt(document.getElementById('frequency').value);
+  const pmt = parseFloat(document.getElementById('contribution').value) || 0;
+
+  if (r < 0 || t < 1) return;
+
+  const rows = [];
+  let balance = P;
+  let totalContrib = P;
+  const rn = r / n;
+
+  for (let yr = 1; yr <= t; yr++) {
+    const startBal = balance;
+    for (let p = 0; p < n; p++) {
+      balance = balance * (1 + rn) + pmt;
+    }
+    totalContrib += pmt * n;
+    const interest = balance - totalContrib;
+    rows.push({ year: yr, balance, interest: balance - (P + pmt * n * yr), contributions: P + pmt * n * yr });
+  }
+
+  const finalBalance = balance;
+  const totalInterest = finalBalance - totalContrib;
+  const multiple = P > 0 ? (finalBalance / P).toFixed(2) + 'x' : '—';
+
+  document.getElementById('out-balance').textContent = fmtC(finalBalance);
+  document.getElementById('out-interest').textContent = fmtC(totalInterest);
+  document.getElementById('out-contributions').textContent = fmtC(totalContrib);
+  document.getElementById('out-multiple').textContent = multiple;
+
+  // Table
+  document.getElementById('table-body').innerHTML = rows.map(r =>
+    `<tr><td>${r.year}</td><td>${fmtC(r.balance)}</td><td>${fmtC(r.interest)}</td><td>${fmtC(r.contributions)}</td></tr>`
+  ).join('');
+
+  // Chart
+  drawChart(rows, P);
+}
+
+function drawChart(rows, P) {
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth || 500;
+  canvas.height = 200;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const W = canvas.width, H = canvas.height;
+  const pad = { l: 60, r: 20, t: 20, b: 30 };
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const maxVal = Math.max(...rows.map(r => r.balance), 1);
+  const barW = Math.max(2, cW / rows.length - 2);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(28,34,48,0.8)'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + cH * (1 - i / 4);
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(74,85,104,0.8)'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'right';
+    ctx.fillText('$' + Math.round(maxVal * i / 4 / 1000) + 'k', pad.l - 4, y + 3);
+  }
+
+  rows.forEach((r, i) => {
+    const x = pad.l + i * (cW / rows.length);
+    const contribH = (r.contributions / maxVal) * cH;
+    const intH = ((r.balance - r.contributions) / maxVal) * cH;
+    ctx.fillStyle = 'rgba(74,158,255,0.7)';
+    ctx.fillRect(x + 1, pad.t + cH - contribH, barW, contribH);
+    ctx.fillStyle = 'rgba(232,160,32,0.7)';
+    ctx.fillRect(x + 1, pad.t + cH - contribH - intH, barW, intH);
+    if (i % Math.ceil(rows.length / 8) === 0) {
+      ctx.fillStyle = 'rgba(74,85,104,0.8)'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
+      ctx.fillText(r.year, x + barW / 2, H - 8);
+    }
+  });
+
+  // Legend
+  ctx.font = '10px DM Sans'; ctx.textAlign = 'left';
+  [['■ Principal', '#4a9eff', pad.l], ['■ Interest', '#e8a020', pad.l + 90]].forEach(([lbl, color, x]) => {
+    ctx.fillStyle = color; ctx.fillText(lbl, x, pad.t - 4);
+  });
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+window.addEventListener('resize', calculate);
+calculate();
+</script>
+</body>
+</html>

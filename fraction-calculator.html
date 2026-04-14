@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fraction Calculator — Free Online | MyMathTools</title>
+<meta name="description" content="Add, subtract, multiply, and divide fractions with step-by-step working. Shows simplified fraction, decimal, and mixed number. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/fraction-calculator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Fraction Calculator","url":"https://mymathtools.com/fraction-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:14px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.fraction-display{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.frac-box{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.frac-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);}
+.frac-line{width:100%;height:1px;background:var(--border2);}
+.op-select{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0 4px;}
+.result-hero{text-align:center;padding:24px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;margin-bottom:16px;}
+.rh-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.rh-frac{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:8px;}
+.rh-num{font-family:'JetBrains Mono',monospace;font-size:28px;color:var(--accent);}
+.rh-line{width:80px;height:2px;background:var(--accent);}
+.result-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-mid);}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);}
+.steps-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;}
+.steps-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.step{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);line-height:2;}
+.step span{color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// arithmetic.fraction_calculator</div>
+  <h1>Fraction <em>Calculator</em></h1>
+  <p class="page-desc">Add, subtract, multiply, and divide fractions with step-by-step working. Shows simplified fraction, decimal, and mixed number.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Inputs</div>
+      <div class="field-group">
+        <label>Operation</label>
+        <select id="op">
+          <option value="add">+ Add</option>
+          <option value="sub">− Subtract</option>
+          <option value="mul">× Multiply</option>
+          <option value="div">÷ Divide</option>
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <div class="field-group"><label for="num1">Numerator 1</label><input type="number" id="num1" placeholder="e.g. 1" step="1"/></div>
+          <div class="field-group"><label for="den1">Denominator 1</label><input type="number" id="den1" placeholder="e.g. 2" step="1"/></div>
+        </div>
+        <div>
+          <div class="field-group"><label for="num2">Numerator 2</label><input type="number" id="num2" placeholder="e.g. 1" step="1"/></div>
+          <div class="field-group"><label for="den2">Denominator 2</label><input type="number" id="den2" placeholder="e.g. 3" step="1"/></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="result-hero">
+        <div class="rh-label">Result (Simplified)</div>
+        <div class="rh-frac">
+          <div class="rh-num" id="out-num">—</div>
+          <div class="rh-line" id="out-line" style="display:none;"></div>
+          <div class="rh-num" id="out-den" style="display:none;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="result-row"><span class="result-label">Decimal</span><span class="result-value" id="out-dec">—</span></div>
+        <div class="result-row"><span class="result-label">Mixed Number</span><span class="result-value" id="out-mixed">—</span></div>
+        <div class="result-row"><span class="result-label">Percentage</span><span class="result-value" id="out-pct">—</span></div>
+      </div>
+      <div class="steps-box">
+        <div class="steps-label">Step-by-step</div>
+        <div class="step" id="out-steps">Enter fractions above.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; }
+
+function simplify(n, d) {
+  if (d === 0) return [n, d];
+  const g = gcd(Math.abs(n), Math.abs(d));
+  const sign = d < 0 ? -1 : 1;
+  return [sign * n / g, sign * d / g];
+}
+
+function toMixed(n, d) {
+  if (Math.abs(n) < Math.abs(d)) return null;
+  const whole = Math.trunc(n / d);
+  const rem = n % d;
+  return rem === 0 ? `${whole}` : `${whole} ${Math.abs(rem)}/${Math.abs(d)}`;
+}
+
+function calculate() {
+  const op = document.getElementById('op').value;
+  const n1 = parseInt(document.getElementById('num1').value);
+  const d1 = parseInt(document.getElementById('den1').value);
+  const n2 = parseInt(document.getElementById('num2').value);
+  const d2 = parseInt(document.getElementById('den2').value);
+
+  if ([n1,d1,n2,d2].some(isNaN)) {
+    document.getElementById('out-num').textContent = '—';
+    document.getElementById('out-line').style.display = 'none';
+    document.getElementById('out-den').style.display = 'none';
+    document.getElementById('out-steps').textContent = 'Enter all four values.';
+    return;
+  }
+
+  if (d1 === 0 || d2 === 0) {
+    document.getElementById('out-num').textContent = 'Undefined';
+    document.getElementById('out-steps').textContent = 'Denominator cannot be zero.';
+    return;
+  }
+
+  let rn, rd, steps = [];
+  const opSym = {add:'+', sub:'−', mul:'×', div:'÷'}[op];
+
+  if (op === 'add' || op === 'sub') {
+    const lcd = (d1 * d2) / gcd(Math.abs(d1), Math.abs(d2));
+    const a = n1 * (lcd / d1), b = n2 * (lcd / d2);
+    rn = op === 'add' ? a + b : a - b;
+    rd = lcd;
+    steps = [
+      `Step 1: Find LCD of ${d1} and ${d2} → LCD = <span>${lcd}</span>`,
+      `Step 2: Convert → ${a}/${lcd} ${opSym} ${b}/${lcd}`,
+      `Step 3: ${op === 'add' ? 'Add' : 'Subtract'} numerators → ${rn}/${lcd}`,
+    ];
+  } else if (op === 'mul') {
+    rn = n1 * n2; rd = d1 * d2;
+    steps = [`Step 1: Multiply numerators: ${n1} × ${n2} = <span>${rn}</span>`, `Step 2: Multiply denominators: ${d1} × ${d2} = <span>${rd}</span>`];
+  } else {
+    if (n2 === 0) { document.getElementById('out-num').textContent = '∞'; document.getElementById('out-steps').textContent = 'Cannot divide by zero fraction.'; return; }
+    rn = n1 * d2; rd = d1 * n2;
+    steps = [`Step 1: Flip second fraction: ${d2}/${n2}`, `Step 2: Multiply: ${n1}/${d1} × ${d2}/${n2} = <span>${rn}/${rd}</span>`];
+  }
+
+  const [sn, sd] = simplify(rn, rd);
+  const g = gcd(Math.abs(rn), Math.abs(rd));
+  steps.push(`Step 4: Simplify by GCD(${Math.abs(rn)}, ${Math.abs(rd)}) = ${g} → <span>${sn}/${sd}</span>`);
+
+  document.getElementById('out-num').textContent = sn;
+  if (sd !== 1) {
+    document.getElementById('out-line').style.display = 'block';
+    document.getElementById('out-den').style.display = 'block';
+    document.getElementById('out-den').textContent = sd;
+  } else {
+    document.getElementById('out-line').style.display = 'none';
+    document.getElementById('out-den').style.display = 'none';
+  }
+
+  const dec = sn / sd;
+  document.getElementById('out-dec').textContent = isFinite(dec) ? dec.toFixed(6).replace(/\.?0+$/, '') : '—';
+  document.getElementById('out-mixed').textContent = Math.abs(sn) > Math.abs(sd) ? (toMixed(sn, sd) || `${sn}/${sd}`) : `${sn}/${sd}`;
+  document.getElementById('out-pct').textContent = isFinite(dec) ? (dec * 100).toFixed(4).replace(/\.?0+$/, '') + '%' : '—';
+  document.getElementById('out-steps').innerHTML = steps.join('<br>');
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+calculate();
+</script>
+</body>
+</html>

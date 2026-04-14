@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Even & Odd Number Generator — Free Online | MyMathTools</title>
+<meta name="description" content="Generate a list of even or odd numbers within any range. Handles negative ranges, shows count, copy to clipboard. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/even-odd-generator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Even & Odd Number Generator","url":"https://mymathtools.com/even-odd-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.controls{display:flex;gap:16px;align-items:flex-end;margin-top:40px;flex-wrap:wrap;}
+.field-group{flex:1;min-width:160px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.btn{padding:11px 20px;background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn:hover{background:var(--surface3);color:var(--text);}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+@media(max-width:640px){.stats-row{grid-template-columns:1fr 1fr;}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px;}
+.sc-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;}
+.sc-val{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);font-weight:500;}
+.sc-val.accent{color:var(--accent);}
+.number-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;max-height:360px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.num-chip{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
+.num-chip.even{color:var(--blue);border-color:rgba(74,158,255,.25);}
+.num-chip.odd{color:var(--green);border-color:rgba(52,201,124,.25);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// sequences.even_odd_generator</div>
+  <h1>Even &amp; Odd Number <em>Generator</em></h1>
+  <p class="page-desc">Generate a list of even, odd, or both types of numbers within any range — including negative ranges. Max 10,000 numbers.</p>
+
+  <div class="controls">
+    <div class="field-group">
+      <label for="type">Number Type</label>
+      <select id="type">
+        <option value="even">Even</option>
+        <option value="odd">Odd</option>
+        <option value="both">Both</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="start">Start of Range</label>
+      <input type="number" id="start" value="1" step="1"/>
+    </div>
+    <div class="field-group">
+      <label for="end">End of Range</label>
+      <input type="number" id="end" value="50" step="1"/>
+    </div>
+    <button class="btn" onclick="copyList()">Copy List</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sc-label">Count</div><div class="sc-val accent" id="out-count">—</div></div>
+    <div class="stat-card"><div class="sc-label">First</div><div class="sc-val" id="out-first">—</div></div>
+    <div class="stat-card"><div class="sc-label">Last</div><div class="sc-val" id="out-last">—</div></div>
+  </div>
+
+  <div class="number-grid" id="number-grid"></div>
+</div>
+
+<script>
+let lastList = [];
+
+function calculate() {
+  const type = document.getElementById('type').value;
+  const start = parseInt(document.getElementById('start').value);
+  const end = parseInt(document.getElementById('end').value);
+
+  if (isNaN(start) || isNaN(end)) return;
+  const lo = Math.min(start, end), hi = Math.max(start, end);
+
+  const nums = [];
+  for (let n = lo; n <= hi && nums.length < 10000; n++) {
+    if (type === 'even' && n % 2 === 0) nums.push(n);
+    else if (type === 'odd' && n % 2 !== 0) nums.push(n);
+    else if (type === 'both') nums.push(n);
+  }
+  lastList = nums;
+
+  document.getElementById('out-count').textContent = nums.length.toLocaleString();
+  document.getElementById('out-first').textContent = nums.length ? nums[0] : '—';
+  document.getElementById('out-last').textContent = nums.length ? nums[nums.length - 1] : '—';
+
+  const grid = document.getElementById('number-grid');
+  const display = nums.slice(0, 2000);
+  grid.innerHTML = display.map(n => {
+    const cls = n % 2 === 0 ? 'even' : 'odd';
+    return `<span class="num-chip ${cls}">${n}</span>`;
+  }).join('');
+  if (nums.length > 2000) {
+    const note = document.createElement('div');
+    note.style.cssText = 'width:100%;font-size:12px;color:var(--text-dim);padding:8px 0;';
+    note.textContent = `Showing first 2,000 of ${nums.length.toLocaleString()} numbers.`;
+    grid.appendChild(note);
+  }
+}
+
+function copyList() {
+  if (!lastList.length) return;
+  navigator.clipboard.writeText(lastList.join(', ')).then(() => {
+    const btn = document.querySelector('.btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy List', 2000);
+  });
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+calculate();
+</script>
+</body>
+</html>

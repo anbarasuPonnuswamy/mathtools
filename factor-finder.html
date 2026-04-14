@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Factor Finder & Prime Factorization — Free Online | MyMathTools</title>
+<meta name="description" content="Find all factors of any integer and display its prime factorization in exponent form. Handles numbers up to 10⁹. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/factor-finder"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Factor Finder & Prime Factorization","url":"https://mymathtools.com/factor-finder","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.pf-display{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:20px;text-align:center;margin-bottom:16px;}
+.pf-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.pf-val{font-family:'JetBrains Mono',monospace;font-size:22px;color:var(--accent);word-break:break-all;}
+.result-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-mid);}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);text-align:right;word-break:break-all;max-width:65%;}
+.factor-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
+.chip.prime{color:var(--green);border-color:rgba(52,201,124,.3);background:rgba(52,201,124,.06);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// number theory.factor_finder</div>
+  <h1>Factor Finder &amp; <em>Prime Factorization</em></h1>
+  <p class="page-desc">Find all factors of any integer and display its prime factorization in exponent form. Handles numbers up to 10⁹.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Input</div>
+      <label for="number">Integer to factorize</label>
+      <input type="number" id="number" placeholder="e.g. 360" min="1" max="1000000000" step="1"/>
+      <div style="margin-top:12px;font-size:12px;color:var(--text-dim);">Enter any positive integer up to 1,000,000,000</div>
+    </div>
+
+    <div>
+      <div class="pf-display">
+        <div class="pf-label">Prime Factorization</div>
+        <div class="pf-val" id="out-pf">—</div>
+      </div>
+      <div class="card">
+        <div class="result-row">
+          <span class="result-label">Total Factors</span>
+          <span class="result-value" id="out-count">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Factor Pairs</span>
+          <span class="result-value" id="out-pairs">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Is Perfect Square?</span>
+          <span class="result-value" id="out-square">—</span>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;">All Factors <span style="color:var(--green);">(green = prime)</span></div>
+        <div class="factor-chips" id="out-factors"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function isPrime(n) {
+  if (n < 2) return false;
+  if (n === 2) return true;
+  if (n % 2 === 0) return false;
+  for (let i = 3; i <= Math.sqrt(n); i += 2) if (n % i === 0) return false;
+  return true;
+}
+
+function primeFactorization(n) {
+  const counts = {};
+  let d = 2;
+  while (d * d <= n) {
+    while (n % d === 0) { counts[d] = (counts[d] || 0) + 1; n = Math.floor(n / d); }
+    d++;
+  }
+  if (n > 1) counts[n] = (counts[n] || 0) + 1;
+  return counts;
+}
+
+function calculate() {
+  const val = parseInt(document.getElementById('number').value);
+  if (isNaN(val) || val < 1) {
+    document.getElementById('out-pf').textContent = '—';
+    document.getElementById('out-count').textContent = '—';
+    document.getElementById('out-pairs').textContent = '—';
+    document.getElementById('out-square').textContent = '—';
+    document.getElementById('out-factors').innerHTML = '';
+    return;
+  }
+
+  // Factors
+  const factors = [];
+  for (let i = 1; i <= Math.sqrt(val); i++) {
+    if (val % i === 0) {
+      factors.push(i);
+      if (i !== val / i) factors.push(val / i);
+    }
+  }
+  factors.sort((a, b) => a - b);
+
+  // Prime factorization
+  const pf = primeFactorization(val);
+  const pfStr = Object.entries(pf).map(([p, e]) => e > 1 ? `${p}^${e}` : p).join(' × ') || '1';
+
+  // Factor pairs
+  const pairs = [];
+  for (let i = 0; i < factors.length / 2; i++) {
+    pairs.push(`(${factors[i]}, ${factors[factors.length - 1 - i]})`);
+  }
+
+  const isSquare = Math.sqrt(val) === Math.floor(Math.sqrt(val));
+
+  document.getElementById('out-pf').textContent = pfStr;
+  document.getElementById('out-count').textContent = factors.length;
+  document.getElementById('out-pairs').textContent = pairs.slice(0, 5).join('  ') + (pairs.length > 5 ? '...' : '');
+  document.getElementById('out-square').textContent = isSquare ? `Yes (√${val} = ${Math.sqrt(val)})` : 'No';
+  document.getElementById('out-factors').innerHTML = factors.map(f =>
+    `<span class="chip${isPrime(f) ? ' prime' : ''}">${f}</span>`
+  ).join('');
+}
+
+document.getElementById('number').addEventListener('input', calculate);
+</script>
+</body>
+</html>

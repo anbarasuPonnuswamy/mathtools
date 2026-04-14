@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pythagorean Theorem Solver — Free Online | MyMathTools</title>
+<meta name="description" content="Solve for any side of a right triangle using the Pythagorean theorem. Shows all three sides, angles, and an SVG diagram. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/pythagorean-theorem"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pythagorean Theorem Solver","url":"https://mymathtools.com/pythagorean-theorem","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:320px 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:900px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+input[disabled]{opacity:0.4;cursor:not-allowed;}
+.result-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-mid);}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);}
+.result-value.accent{color:var(--accent);}
+.result-value.green{color:var(--green);}
+.svg-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:16px;text-align:center;}
+.svg-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// geometry.pythagorean_theorem</div>
+  <h1>Pythagorean Theorem <em>Solver</em></h1>
+  <p class="page-desc">Solve for any side of a right triangle. Enter two known sides — the third is calculated automatically with a visual diagram.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Inputs</div>
+      <div class="field-group">
+        <label for="solve_for">Solve For</label>
+        <select id="solve_for">
+          <option value="c">Hypotenuse (c)</option>
+          <option value="a">Side a</option>
+          <option value="b">Side b</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="sideA">Side a</label>
+        <input type="number" id="sideA" placeholder="Enter side a" min="0" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="sideB">Side b</label>
+        <input type="number" id="sideB" placeholder="Enter side b" min="0" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="sideC">Hypotenuse c</label>
+        <input type="number" id="sideC" placeholder="Enter hypotenuse c" min="0" step="any"/>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="result-row"><span class="result-label">Side a</span><span class="result-value accent" id="out-a">—</span></div>
+        <div class="result-row"><span class="result-label">Side b</span><span class="result-value accent" id="out-b">—</span></div>
+        <div class="result-row"><span class="result-label">Hypotenuse c</span><span class="result-value accent" id="out-c">—</span></div>
+        <div class="result-row"><span class="result-label">Angle A (opposite a)</span><span class="result-value green" id="out-A">—</span></div>
+        <div class="result-row"><span class="result-label">Angle B (opposite b)</span><span class="result-value green" id="out-B">—</span></div>
+        <div class="result-row"><span class="result-label">Angle C (right angle)</span><span class="result-value" id="out-C">90°</span></div>
+        <div class="result-row"><span class="result-label">Area</span><span class="result-value" id="out-area">—</span></div>
+        <div class="result-row"><span class="result-label">Perimeter</span><span class="result-value" id="out-perim">—</span></div>
+      </div>
+      <div class="svg-wrap">
+        <div class="svg-label">Triangle Diagram</div>
+        <div id="svg-container"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmt(n) { return isFinite(n) ? parseFloat(n.toFixed(4)).toString() : '—'; }
+function deg(rad) { return (rad * 180 / Math.PI).toFixed(2) + '°'; }
+
+function updateInputStates() {
+  const solve = document.getElementById('solve_for').value;
+  document.getElementById('sideA').disabled = solve === 'a';
+  document.getElementById('sideB').disabled = solve === 'b';
+  document.getElementById('sideC').disabled = solve === 'c';
+  if (solve === 'a') document.getElementById('sideA').value = '';
+  if (solve === 'b') document.getElementById('sideB').value = '';
+  if (solve === 'c') document.getElementById('sideC').value = '';
+}
+
+function calculate() {
+  const solve = document.getElementById('solve_for').value;
+  let a = parseFloat(document.getElementById('sideA').value);
+  let b = parseFloat(document.getElementById('sideB').value);
+  let c = parseFloat(document.getElementById('sideC').value);
+
+  if (solve === 'c' && !isNaN(a) && !isNaN(b) && a > 0 && b > 0) c = Math.sqrt(a*a + b*b);
+  else if (solve === 'a' && !isNaN(b) && !isNaN(c) && c > b && b > 0) a = Math.sqrt(c*c - b*b);
+  else if (solve === 'b' && !isNaN(a) && !isNaN(c) && c > a && a > 0) b = Math.sqrt(c*c - a*a);
+  else { clearResults(); return; }
+
+  if (!isFinite(a) || !isFinite(b) || !isFinite(c) || a <= 0 || b <= 0 || c <= 0) { clearResults(); return; }
+
+  const A = Math.asin(a / c), B = Math.asin(b / c);
+
+  document.getElementById('out-a').textContent = fmt(a);
+  document.getElementById('out-b').textContent = fmt(b);
+  document.getElementById('out-c').textContent = fmt(c);
+  document.getElementById('out-A').textContent = deg(A);
+  document.getElementById('out-B').textContent = deg(B);
+  document.getElementById('out-area').textContent = fmt(0.5 * a * b);
+  document.getElementById('out-perim').textContent = fmt(a + b + c);
+
+  drawSVG(a, b, c);
+}
+
+function clearResults() {
+  ['out-a','out-b','out-c','out-A','out-B','out-area','out-perim'].forEach(id => document.getElementById(id).textContent = '—');
+  document.getElementById('svg-container').innerHTML = '';
+}
+
+function drawSVG(a, b, c) {
+  const scale = 160 / Math.max(a, b, c);
+  const sa = a * scale, sb = b * scale;
+  const W = sb + 60, H = sa + 60;
+  const ox = 30, oy = H - 30;
+
+  document.getElementById('svg-container').innerHTML = `
+    <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="${ox},${oy} ${ox+sb},${oy} ${ox},${oy-sa}" fill="rgba(232,160,32,0.06)" stroke="#e8a020" stroke-width="2"/>
+      <rect x="${ox}" y="${oy-12}" width="12" height="12" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+      <text x="${ox + sb/2}" y="${oy + 18}" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#8a97ab">b = ${fmt(b)}</text>
+      <text x="${ox - 18}" y="${oy - sa/2}" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#8a97ab">a = ${fmt(a)}</text>
+      <text x="${ox + sb/2 + 14}" y="${oy - sa/2}" text-anchor="start" font-family="JetBrains Mono" font-size="12" fill="#e8a020">c = ${fmt(c)}</text>
+    </svg>`;
+}
+
+document.getElementById('solve_for').addEventListener('change', () => { updateInputStates(); calculate(); });
+document.querySelectorAll('input').forEach(el => el.addEventListener('input', calculate));
+updateInputStates();
+</script>
+</body>
+</html>

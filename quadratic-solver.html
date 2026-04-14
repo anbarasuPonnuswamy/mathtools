@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quadratic Equation Solver — Free Online | MyMathTools</title>
+<meta name="description" content="Solve ax²+bx+c=0 with step-by-step discriminant analysis, exact and decimal roots, and a canvas parabola graph. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/quadratic-solver"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Quadratic Equation Solver","url":"https://mymathtools.com/quadratic-solver","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;--coral:#ff6b6b;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:300px 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:900px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.eq-display{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text-mid);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:20px;text-align:center;}
+.eq-display span{color:var(--accent);}
+.result-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+.result-row:last-child{border-bottom:none;}
+.result-label{font-size:13px;color:var(--text-mid);}
+.result-value{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);text-align:right;max-width:60%;}
+.result-value.accent{color:var(--accent);}
+.result-value.green{color:var(--green);}
+.result-value.coral{color:var(--coral);}
+.steps-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;}
+.steps-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.step{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);line-height:2;}
+.step span{color:var(--accent);}
+canvas{width:100%;border-radius:8px;display:block;margin-top:16px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// algebra.quadratic_solver</div>
+  <h1>Quadratic Equation <em>Solver</em></h1>
+  <p class="page-desc">Solve ax² + bx + c = 0 with step-by-step discriminant analysis, exact roots, and a live parabola graph.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Coefficients</div>
+      <div class="eq-display" id="eq-display"><span>a</span>x² + <span>b</span>x + <span>c</span> = 0</div>
+      <div class="field-group">
+        <label for="a">a (coefficient of x²)</label>
+        <input type="number" id="a" placeholder="e.g. 1" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="b">b (coefficient of x)</label>
+        <input type="number" id="b" placeholder="e.g. -5" step="any"/>
+      </div>
+      <div class="field-group">
+        <label for="c">c (constant)</label>
+        <input type="number" id="c" placeholder="e.g. 6" step="any"/>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="result-row"><span class="result-label">Discriminant (Δ = b²−4ac)</span><span class="result-value accent" id="out-disc">—</span></div>
+        <div class="result-row"><span class="result-label">Nature of Roots</span><span class="result-value" id="out-nature">—</span></div>
+        <div class="result-row"><span class="result-label">Root x₁</span><span class="result-value green" id="out-x1">—</span></div>
+        <div class="result-row"><span class="result-label">Root x₂</span><span class="result-value green" id="out-x2">—</span></div>
+        <div class="result-row"><span class="result-label">Vertex (h, k)</span><span class="result-value" id="out-vertex">—</span></div>
+        <div class="result-row"><span class="result-label">Axis of Symmetry</span><span class="result-value" id="out-axis">—</span></div>
+      </div>
+      <div class="steps-box">
+        <div class="steps-label">Step-by-step Solution</div>
+        <div class="step" id="out-steps">Enter coefficients above.</div>
+      </div>
+      <canvas id="chart" height="220"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+function fmt(n, d=4) { return parseFloat(n.toFixed(d)).toString(); }
+
+function calculate() {
+  const a = parseFloat(document.getElementById('a').value);
+  const b = parseFloat(document.getElementById('b').value);
+  const c = parseFloat(document.getElementById('c').value);
+
+  const aStr = isNaN(a) ? 'a' : a;
+  const bStr = isNaN(b) ? 'b' : (b < 0 ? `${b}` : `+${b}`);
+  const cStr = isNaN(c) ? 'c' : (c < 0 ? `${c}` : `+${c}`);
+  document.getElementById('eq-display').innerHTML =
+    `<span>${aStr}</span>x² <span>${bStr}</span>x <span>${cStr}</span> = 0`;
+
+  if ([a,b,c].some(isNaN) || a === 0) {
+    document.getElementById('out-steps').textContent = a === 0 ? 'a cannot be 0 (not quadratic).' : 'Enter all three coefficients.';
+    return;
+  }
+
+  const D = b * b - 4 * a * c;
+  const h = -b / (2 * a);
+  const k = a * h * h + b * h + c;
+
+  document.getElementById('out-disc').textContent = fmt(D);
+  document.getElementById('out-vertex').textContent = `(${fmt(h)}, ${fmt(k)})`;
+  document.getElementById('out-axis').textContent = `x = ${fmt(h)}`;
+
+  let x1, x2, nature;
+  if (D > 0) {
+    x1 = (-b + Math.sqrt(D)) / (2 * a);
+    x2 = (-b - Math.sqrt(D)) / (2 * a);
+    nature = 'Two distinct real roots';
+    document.getElementById('out-x1').textContent = fmt(x1);
+    document.getElementById('out-x2').textContent = fmt(x2);
+  } else if (D === 0) {
+    x1 = x2 = -b / (2 * a);
+    nature = 'One repeated real root';
+    document.getElementById('out-x1').textContent = fmt(x1);
+    document.getElementById('out-x2').textContent = fmt(x2) + ' (same)';
+  } else {
+    const re = -b / (2 * a), im = Math.sqrt(-D) / (2 * a);
+    nature = 'Two complex (imaginary) roots';
+    document.getElementById('out-x1').textContent = `${fmt(re)} + ${fmt(im)}i`;
+    document.getElementById('out-x2').textContent = `${fmt(re)} − ${fmt(im)}i`;
+  }
+  document.getElementById('out-nature').textContent = nature;
+
+  document.getElementById('out-steps').innerHTML = [
+    `Step 1: Identify a=<span>${a}</span>, b=<span>${b}</span>, c=<span>${c}</span>`,
+    `Step 2: Discriminant Δ = b²−4ac = ${b}²−4(${a})(${c}) = <span>${fmt(D)}</span>`,
+    `Step 3: ${D > 0 ? 'Δ > 0 → two real roots' : D === 0 ? 'Δ = 0 → one repeated root' : 'Δ < 0 → complex roots'}`,
+    `Step 4: x = (−b ± √Δ) / 2a = (${-b} ± √${fmt(D)}) / ${2*a}`,
+  ].join('<br>');
+
+  drawChart(a, b, c, D > 0 ? [x1, x2] : D === 0 ? [x1] : []);
+}
+
+function drawChart(a, b, c, roots) {
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth || 500;
+  canvas.height = 220;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const W = canvas.width, H = canvas.height;
+  const h = -b / (2 * a);
+  const xRange = Math.max(10, Math.abs(h) * 3 + 5);
+  const xMin = h - xRange, xMax = h + xRange;
+
+  const ys = [];
+  for (let px = 0; px < W; px++) {
+    const x = xMin + (px / W) * (xMax - xMin);
+    ys.push(a * x * x + b * x + c);
+  }
+  const yMin = Math.min(...ys), yMax = Math.max(...ys);
+  const yRange = Math.max(yMax - yMin, 1);
+  const pad = { l: 40, r: 20, t: 20, b: 30 };
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+
+  const toCanvasX = x => pad.l + ((x - xMin) / (xMax - xMin)) * cW;
+  const toCanvasY = y => pad.t + (1 - (y - yMin) / yRange) * cH;
+
+  // Grid
+  ctx.strokeStyle = 'rgba(28,34,48,0.8)'; ctx.lineWidth = 1;
+  const x0 = toCanvasX(0), y0 = toCanvasY(0);
+  if (x0 >= pad.l && x0 <= W - pad.r) { ctx.beginPath(); ctx.moveTo(x0, pad.t); ctx.lineTo(x0, H - pad.b); ctx.stroke(); }
+  if (y0 >= pad.t && y0 <= H - pad.b) { ctx.beginPath(); ctx.moveTo(pad.l, y0); ctx.lineTo(W - pad.r, y0); ctx.stroke(); }
+
+  // Parabola
+  ctx.strokeStyle = 'rgba(232,160,32,0.9)'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  for (let px = 0; px < W; px++) {
+    const x = xMin + (px / W) * (xMax - xMin);
+    const y = a * x * x + b * x + c;
+    const cx = toCanvasX(x), cy = toCanvasY(y);
+    px === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.stroke();
+
+  // Roots
+  roots.forEach(r => {
+    const cx = toCanvasX(r), cy = toCanvasY(0);
+    ctx.fillStyle = '#34c97c';
+    ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(74,85,104,0.9)'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
+    ctx.fillText(parseFloat(r.toFixed(3)), cx, cy + 16);
+  });
+}
+
+document.querySelectorAll('input').forEach(el => el.addEventListener('input', calculate));
+window.addEventListener('resize', calculate);
+</script>
+</body>
+</html>

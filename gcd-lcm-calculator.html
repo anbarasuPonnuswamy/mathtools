@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GCD & LCM Calculator — Free Online | MyMathTools</title>
+<meta name="description" content="Free GCD and LCM calculator — find the greatest common divisor and least common multiple of 2 or more integers with step-by-step Euclidean algorithm. No sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/gcd-lcm-calculator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GCD & LCM Calculator","url":"https://mymathtools.com/gcd-lcm-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=text]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.big-result{text-align:center;padding:20px;border-radius:10px;margin-bottom:16px;}
+.big-result.gcd{background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.25);}
+.big-result.lcm{background:rgba(52,201,124,.08);border:1px solid rgba(52,201,124,.25);}
+.br-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.br-val{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:500;}
+.br-val.blue{color:var(--blue);}
+.br-val.green{color:var(--green);}
+.steps-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;}
+.steps-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.step-line{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);line-height:1.8;}
+.step-line span{color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// arithmetic.gcd_lcm_calculator</div>
+  <h1>GCD &amp; LCM <em>Calculator</em></h1>
+  <p class="page-desc">Find the Greatest Common Divisor and Least Common Multiple of two or more integers, with step-by-step Euclidean algorithm trace.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Input</div>
+      <label for="numbers">Numbers (comma-separated)</label>
+      <input type="text" id="numbers" placeholder="e.g. 12, 18, 24" value="12, 18"/>
+      <div style="margin-top:12px;font-size:12px;color:var(--text-dim);">Enter 2 or more positive integers separated by commas.</div>
+    </div>
+
+    <div>
+      <div class="big-result gcd">
+        <div class="br-label">Greatest Common Divisor (GCD)</div>
+        <div class="br-val blue" id="out-gcd">—</div>
+      </div>
+      <div class="big-result lcm">
+        <div class="br-label">Least Common Multiple (LCM)</div>
+        <div class="br-val green" id="out-lcm">—</div>
+      </div>
+      <div class="steps-box">
+        <div class="steps-label">Euclidean Algorithm Steps</div>
+        <div id="out-steps" class="step-line">Enter numbers to see steps.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function gcd2(a, b) {
+  while (b) { [a, b] = [b, a % b]; }
+  return a;
+}
+
+function gcdSteps(a, b) {
+  const steps = [];
+  let x = a, y = b;
+  while (y) {
+    const q = Math.floor(x / y), r = x % y;
+    steps.push(`gcd(${x}, ${y}) → ${x} = ${q} × ${y} + ${r}`);
+    [x, y] = [y, r];
+  }
+  steps.push(`GCD = <span>${x}</span>`);
+  return steps;
+}
+
+function lcm2(a, b) { return (a / gcd2(a, b)) * b; }
+
+function calculate() {
+  const raw = document.getElementById('numbers').value;
+  const nums = raw.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n) && n > 0);
+
+  if (nums.length < 2) {
+    document.getElementById('out-gcd').textContent = '—';
+    document.getElementById('out-lcm').textContent = '—';
+    document.getElementById('out-steps').innerHTML = 'Enter at least 2 positive integers.';
+    return;
+  }
+
+  let g = nums[0];
+  const steps = [];
+  for (let i = 1; i < nums.length; i++) {
+    if (i === 1) steps.push(...gcdSteps(nums[0], nums[1]));
+    else steps.push(`gcd(prev, ${nums[i]}) steps...`);
+    g = gcd2(g, nums[i]);
+  }
+
+  let l = nums[0];
+  for (let i = 1; i < nums.length; i++) l = lcm2(l, nums[i]);
+
+  document.getElementById('out-gcd').textContent = g;
+  document.getElementById('out-lcm').textContent = l.toLocaleString();
+  document.getElementById('out-steps').innerHTML = steps.join('<br>');
+}
+
+document.getElementById('numbers').addEventListener('input', calculate);
+calculate();
+</script>
+</body>
+</html>

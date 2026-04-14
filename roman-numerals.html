@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Roman Numeral Converter — Free Online | MyMathTools</title>
+<meta name="description" content="Convert integers to Roman numerals and Roman numerals back to integers. Supports 1–3999 with symbol breakdown. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/roman-numerals"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Roman Numeral Converter","url":"https://mymathtools.com/roman-numerals","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:960px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.tool-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:start;}
+@media(max-width:768px){.tool-layout{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;}
+.field-group{margin-bottom:18px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=text],select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+.result-hero{text-align:center;padding:28px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;margin-bottom:16px;}
+.rh-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.rh-val{font-family:'Playfair Display',serif;font-size:36px;color:var(--accent);}
+.breakdown-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;}
+.breakdown-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+.symbol-row{display:flex;gap:8px;flex-wrap:wrap;}
+.sym-chip{background:var(--surface3);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;text-align:center;}
+.sym-roman{font-family:'Playfair Display',serif;font-size:18px;color:var(--accent);}
+.sym-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:2px;}
+.error-msg{font-size:12px;color:#ff6b6b;margin-top:6px;min-height:18px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// utility.roman_numerals</div>
+  <h1>Roman Numeral <em>Converter</em></h1>
+  <p class="page-desc">Convert integers to Roman numerals and Roman numerals back to integers. Supports 1–3999 with full symbol breakdown.</p>
+
+  <div class="tool-layout">
+    <div class="card">
+      <div class="card-label">Input</div>
+      <div class="field-group">
+        <label for="mode">Direction</label>
+        <select id="mode">
+          <option value="to_roman">Integer → Roman</option>
+          <option value="to_int">Roman → Integer</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="value" id="value-label">Integer (1–3999)</label>
+        <input type="text" id="value" placeholder="e.g. 2024"/>
+        <div class="error-msg" id="error-msg"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="result-hero">
+        <div class="rh-label" id="result-label">Result</div>
+        <div class="rh-val" id="out-result">—</div>
+      </div>
+      <div class="breakdown-box">
+        <div class="breakdown-label">Symbol Breakdown</div>
+        <div class="symbol-row" id="out-breakdown"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SYMBOLS = [
+  ['M',1000],['CM',900],['D',500],['CD',400],
+  ['C',100],['XC',90],['L',50],['XL',40],
+  ['X',10],['IX',9],['V',5],['IV',4],['I',1]
+];
+
+function toRoman(n) {
+  let result = '', breakdown = [];
+  for (const [sym, val] of SYMBOLS) {
+    while (n >= val) { result += sym; breakdown.push({sym, val}); n -= val; }
+  }
+  return { result, breakdown };
+}
+
+function fromRoman(s) {
+  const map = {M:1000,D:500,C:100,L:50,X:10,V:5,I:1};
+  let total = 0, breakdown = [];
+  const upper = s.toUpperCase();
+  for (let i = 0; i < upper.length; i++) {
+    const cur = map[upper[i]], next = map[upper[i+1]];
+    if (!cur) return null;
+    if (next && cur < next) { breakdown.push({sym: upper[i]+upper[i+1], val: next-cur}); total += next - cur; i++; }
+    else { breakdown.push({sym: upper[i], val: cur}); total += cur; }
+  }
+  return { result: total, breakdown };
+}
+
+function calculate() {
+  const mode = document.getElementById('mode').value;
+  const val = document.getElementById('value').value.trim();
+  const errEl = document.getElementById('error-msg');
+  const label = document.getElementById('value-label');
+  label.textContent = mode === 'to_roman' ? 'Integer (1–3999)' : 'Roman Numeral';
+
+  errEl.textContent = '';
+  if (!val) {
+    document.getElementById('out-result').textContent = '—';
+    document.getElementById('out-breakdown').innerHTML = '';
+    return;
+  }
+
+  if (mode === 'to_roman') {
+    const n = parseInt(val);
+    if (isNaN(n) || n < 1 || n > 3999) { errEl.textContent = 'Enter an integer between 1 and 3999'; document.getElementById('out-result').textContent = '—'; return; }
+    const { result, breakdown } = toRoman(n);
+    document.getElementById('result-label').textContent = 'Roman Numeral';
+    document.getElementById('out-result').textContent = result;
+    document.getElementById('out-breakdown').innerHTML = breakdown.map(b =>
+      `<div class="sym-chip"><div class="sym-roman">${b.sym}</div><div class="sym-val">${b.val}</div></div>`
+    ).join('');
+  } else {
+    const parsed = fromRoman(val);
+    if (!parsed || parsed.result < 1 || parsed.result > 3999) { errEl.textContent = 'Invalid Roman numeral'; document.getElementById('out-result').textContent = '—'; return; }
+    document.getElementById('result-label').textContent = 'Integer Value';
+    document.getElementById('out-result').textContent = parsed.result.toLocaleString();
+    document.getElementById('out-breakdown').innerHTML = parsed.breakdown.map(b =>
+      `<div class="sym-chip"><div class="sym-roman">${b.sym}</div><div class="sym-val">${b.val}</div></div>`
+    ).join('');
+  }
+}
+
+document.getElementById('value').addEventListener('input', calculate);
+document.getElementById('mode').addEventListener('change', calculate);
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prime Number List Generator — Free Online | MyMathTools</title>
+<meta name="description" content="Generate all prime numbers up to 1,000,000 using the Sieve of Eratosthenes. Copy list, see count and density. Free, no sign-up."/>
+<link rel="canonical" href="https://mymathtools.com/prime-list"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prime Number List Generator","url":"https://mymathtools.com/prime-list","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--blue:#4a9eff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.controls{display:flex;gap:16px;align-items:flex-end;margin-top:40px;flex-wrap:wrap;}
+.field-group{flex:1;min-width:200px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+input[type=number]{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.btn{padding:11px 20px;background:var(--accent);color:#080b10;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn:hover{background:#f0b429;}
+.btn-outline{background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);}
+.btn-outline:hover{background:var(--surface3);color:var(--text);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;}
+@media(max-width:640px){.stats-row{grid-template-columns:1fr 1fr;}}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px;}
+.sc-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;}
+.sc-val{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);font-weight:500;}
+.sc-val.accent{color:var(--accent);}
+.prime-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:24px;max-height:400px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.prime-chip{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
+.time-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:12px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// number theory.prime_list</div>
+  <h1>Prime Number <em>List Generator</em></h1>
+  <p class="page-desc">Generate all prime numbers up to N using the Sieve of Eratosthenes. Supports up to 1,000,000.</p>
+
+  <div class="controls">
+    <div class="field-group">
+      <label for="limit">Generate primes up to</label>
+      <input type="number" id="limit" value="100" min="2" max="1000000" step="1"/>
+    </div>
+    <button class="btn" onclick="generate()">Generate</button>
+    <button class="btn btn-outline" onclick="copyList()">Copy List</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sc-label">Count</div><div class="sc-val accent" id="out-count">—</div></div>
+    <div class="stat-card"><div class="sc-label">Largest Prime</div><div class="sc-val" id="out-largest">—</div></div>
+    <div class="stat-card"><div class="sc-label">Density (per 100)</div><div class="sc-val" id="out-density">—</div></div>
+    <div class="stat-card"><div class="sc-label">Compute Time</div><div class="sc-val" id="out-time">—</div></div>
+  </div>
+
+  <div class="prime-grid" id="prime-grid"></div>
+  <div class="time-note" id="time-note"></div>
+</div>
+
+<script>
+let lastPrimes = [];
+
+function sieve(limit) {
+  const composite = new Uint8Array(limit + 1);
+  composite[0] = composite[1] = 1;
+  for (let i = 2; i * i <= limit; i++) {
+    if (!composite[i]) for (let j = i * i; j <= limit; j += i) composite[j] = 1;
+  }
+  const primes = [];
+  for (let i = 2; i <= limit; i++) if (!composite[i]) primes.push(i);
+  return primes;
+}
+
+function generate() {
+  const limit = parseInt(document.getElementById('limit').value);
+  if (isNaN(limit) || limit < 2) return;
+  if (limit > 1000000) { document.getElementById('limit').value = 1000000; return generate(); }
+
+  const t0 = performance.now();
+  const primes = sieve(limit);
+  const t1 = performance.now();
+  lastPrimes = primes;
+
+  document.getElementById('out-count').textContent = primes.length.toLocaleString();
+  document.getElementById('out-largest').textContent = primes.length ? primes[primes.length - 1].toLocaleString() : '—';
+  document.getElementById('out-density').textContent = ((primes.length / limit) * 100).toFixed(2);
+  document.getElementById('out-time').textContent = (t1 - t0).toFixed(1) + 'ms';
+
+  const grid = document.getElementById('prime-grid');
+  const display = primes.slice(0, 5000);
+  grid.innerHTML = display.map(p => `<span class="prime-chip">${p}</span>`).join('');
+  if (primes.length > 5000) {
+    const note = document.createElement('div');
+    note.style.cssText = 'width:100%;font-size:12px;color:var(--text-dim);padding:8px 0;';
+    note.textContent = `Showing first 5,000 of ${primes.length.toLocaleString()} primes. Copy to get all.`;
+    grid.appendChild(note);
+  }
+}
+
+function copyList() {
+  if (!lastPrimes.length) return;
+  navigator.clipboard.writeText(lastPrimes.join(', ')).then(() => {
+    const btn = document.querySelector('.btn-outline');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy List', 2000);
+  });
+}
+
+generate();
+</script>
+</body>
+</html>

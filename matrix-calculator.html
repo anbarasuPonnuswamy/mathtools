@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Matrix Calculator — Free Online | MyMathTools</title>
+<meta name="description" content="Free matrix calculator — add, subtract, multiply, transpose, determinant, and inverse for matrices up to 4×4. No sign-up required."/>
+<link rel="canonical" href="https://mymathtools.com/matrix-calculator"/>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Matrix Calculator","url":"https://mymathtools.com/matrix-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PSR9F5316"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3PSR9F5316');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#080b10;--surface:#0e1219;--surface2:#131821;--surface3:#181f2a;--border:#1c2230;--border2:#252f40;--accent:#e8a020;--accent-dim:rgba(232,160,32,.12);--text:#eef1f6;--text-mid:#8a97ab;--text-dim:#4a5568;--green:#34c97c;--coral:#ff6b6b;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(8,11,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-link{font-size:12px;color:var(--text-mid);text-decoration:none;transition:color .2s;}
+.nav-link:hover{color:var(--text);}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,160,32,.3);padding:3px 9px;border-radius:3px;}
+.page{max-width:1100px;margin:0 auto;padding:48px 32px 80px;position:relative;z-index:1;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.1;}
+h1 em{font-style:italic;color:var(--accent);}
+.page-desc{margin-top:10px;font-size:14px;font-weight:300;color:var(--text-mid);line-height:1.6;}
+.controls{display:flex;gap:16px;align-items:flex-end;margin-top:40px;flex-wrap:wrap;}
+.field-group{flex:1;min-width:160px;}
+label{display:block;font-size:12px;font-weight:500;color:var(--text-mid);letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px;}
+select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;appearance:none;}
+select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+.matrices-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;}
+@media(max-width:768px){.matrices-row{grid-template-columns:1fr;}}
+.matrix-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.matrix-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.matrix-grid{display:inline-grid;gap:6px;}
+.matrix-grid input{width:60px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);text-align:center;outline:none;transition:border-color .2s;}
+.matrix-grid input:focus{border-color:var(--accent);}
+.result-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:24px;}
+.result-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.result-matrix{display:inline-grid;gap:6px;margin-bottom:12px;}
+.result-cell{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;text-align:center;min-width:60px;}
+.error-box{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.3);border-radius:8px;padding:12px 16px;color:var(--coral);font-size:13px;}
+.scalar-result{font-family:'JetBrains Mono',monospace;font-size:28px;color:var(--accent);}
+.dim-row{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
+.dim-select{width:60px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);outline:none;cursor:pointer;appearance:none;text-align:center;}
+.dim-label{font-size:12px;color:var(--text-dim);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><span class="logo-dot"></span>mymathtools</a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">← All Tools</a>
+    <span class="nav-tag">FREE</span>
+  </div>
+</nav>
+<div class="page">
+  <div class="eyebrow">// linear algebra.matrix_calculator</div>
+  <h1>Matrix <em>Calculator</em></h1>
+  <p class="page-desc">Perform matrix operations: addition, subtraction, multiplication, transpose, determinant, and inverse for matrices up to 4×4.</p>
+
+  <div class="controls">
+    <div class="field-group">
+      <label for="op">Operation</label>
+      <select id="op" onchange="calculate()">
+        <option value="add">A + B (Add)</option>
+        <option value="sub">A − B (Subtract)</option>
+        <option value="mul">A × B (Multiply)</option>
+        <option value="transpose">Transpose A</option>
+        <option value="det">Determinant of A</option>
+        <option value="inv">Inverse of A</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="matrices-row">
+    <div class="matrix-card">
+      <div class="matrix-label">Matrix A</div>
+      <div class="dim-row">
+        <select class="dim-select" id="rowsA" onchange="buildGrids()">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+        </select>
+        <span class="dim-label">rows ×</span>
+        <select class="dim-select" id="colsA" onchange="buildGrids()">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+        </select>
+        <span class="dim-label">cols</span>
+      </div>
+      <div class="matrix-grid" id="gridA"></div>
+    </div>
+    <div class="matrix-card" id="matrixB-card">
+      <div class="matrix-label">Matrix B</div>
+      <div class="dim-row">
+        <select class="dim-select" id="rowsB" onchange="buildGrids()">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+        </select>
+        <span class="dim-label">rows ×</span>
+        <select class="dim-select" id="colsB" onchange="buildGrids()">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+        </select>
+        <span class="dim-label">cols</span>
+      </div>
+      <div class="matrix-grid" id="gridB"></div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-label">Result</div>
+    <div id="result-output"><div style="color:var(--text-dim);font-size:13px;">Configure matrices above</div></div>
+  </div>
+</div>
+
+<script>
+function buildGrids() {
+  const op = document.getElementById('op').value;
+  const needsB = ['add','sub','mul'].includes(op);
+  document.getElementById('matrixB-card').style.opacity = needsB ? '1' : '0.3';
+
+  buildGrid('A', parseInt(document.getElementById('rowsA').value), parseInt(document.getElementById('colsA').value));
+  buildGrid('B', parseInt(document.getElementById('rowsB').value), parseInt(document.getElementById('colsB').value));
+  calculate();
+}
+
+function buildGrid(name, rows, cols) {
+  const grid = document.getElementById('grid' + name);
+  grid.style.gridTemplateColumns = `repeat(${cols}, 60px)`;
+  const existing = grid.querySelectorAll('input');
+  const vals = Array.from(existing).map(i => i.value);
+  grid.innerHTML = '';
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const inp = document.createElement('input');
+      inp.value = vals[r * cols + c] || '0';
+      inp.addEventListener('input', calculate);
+      grid.appendChild(inp);
+    }
+  }
+}
+
+function getMatrix(name) {
+  const rows = parseInt(document.getElementById('rows' + name).value);
+  const cols = parseInt(document.getElementById('cols' + name).value);
+  const inputs = document.getElementById('grid' + name).querySelectorAll('input');
+  const m = [];
+  for (let r = 0; r < rows; r++) {
+    m.push([]);
+    for (let c = 0; c < cols; c++) m[r].push(parseFloat(inputs[r * cols + c].value) || 0);
+  }
+  return m;
+}
+
+function det(m) {
+  const n = m.length;
+  if (n === 1) return m[0][0];
+  if (n === 2) return m[0][0]*m[1][1] - m[0][1]*m[1][0];
+  let d = 0;
+  for (let c = 0; c < n; c++) {
+    const sub = m.slice(1).map(row => row.filter((_, j) => j !== c));
+    d += (c % 2 === 0 ? 1 : -1) * m[0][c] * det(sub);
+  }
+  return d;
+}
+
+function inv(m) {
+  const n = m.length;
+  const aug = m.map((row, i) => [...row, ...Array.from({length:n}, (_, j) => i === j ? 1 : 0)]);
+  for (let i = 0; i < n; i++) {
+    let pivot = aug[i][i];
+    if (Math.abs(pivot) < 1e-10) return null;
+    for (let j = 0; j < 2*n; j++) aug[i][j] /= pivot;
+    for (let k = 0; k < n; k++) {
+      if (k === i) continue;
+      const f = aug[k][i];
+      for (let j = 0; j < 2*n; j++) aug[k][j] -= f * aug[i][j];
+    }
+  }
+  return aug.map(row => row.slice(n));
+}
+
+function renderMatrix(m) {
+  const cols = m[0].length;
+  const grid = document.createElement('div');
+  grid.className = 'result-matrix';
+  grid.style.gridTemplateColumns = `repeat(${cols}, auto)`;
+  m.forEach(row => row.forEach(v => {
+    const cell = document.createElement('div');
+    cell.className = 'result-cell';
+    cell.textContent = parseFloat(v.toFixed(6)).toString();
+    grid.appendChild(cell);
+  }));
+  return grid;
+}
+
+function calculate() {
+  const op = document.getElementById('op').value;
+  const A = getMatrix('A'), B = getMatrix('B');
+  const rA = A.length, cA = A[0].length, rB = B.length, cB = B[0].length;
+  const out = document.getElementById('result-output');
+
+  try {
+    let result;
+    if (op === 'add' || op === 'sub') {
+      if (rA !== rB || cA !== cB) { out.innerHTML = `<div class="error-box">Dimension mismatch: A is ${rA}×${cA}, B is ${rB}×${cB}. Must be equal for add/subtract.</div>`; return; }
+      result = A.map((row, r) => row.map((v, c) => op === 'add' ? v + B[r][c] : v - B[r][c]));
+      out.innerHTML = ''; out.appendChild(renderMatrix(result));
+    } else if (op === 'mul') {
+      if (cA !== rB) { out.innerHTML = `<div class="error-box">Dimension mismatch: A cols (${cA}) must equal B rows (${rB}) for multiplication.</div>`; return; }
+      result = Array.from({length:rA}, (_, r) => Array.from({length:cB}, (_, c) => A[r].reduce((s, _, k) => s + A[r][k]*B[k][c], 0)));
+      out.innerHTML = ''; out.appendChild(renderMatrix(result));
+    } else if (op === 'transpose') {
+      result = Array.from({length:cA}, (_, c) => Array.from({length:rA}, (_, r) => A[r][c]));
+      out.innerHTML = ''; out.appendChild(renderMatrix(result));
+    } else if (op === 'det') {
+      if (rA !== cA) { out.innerHTML = `<div class="error-box">Determinant requires a square matrix. A is ${rA}×${cA}.</div>`; return; }
+      const d = det(A);
+      out.innerHTML = `<div class="scalar-result">${parseFloat(d.toFixed(8)).toString()}</div>`;
+    } else if (op === 'inv') {
+      if (rA !== cA) { out.innerHTML = `<div class="error-box">Inverse requires a square matrix.</div>`; return; }
+      const i = inv(A);
+      if (!i) { out.innerHTML = `<div class="error-box">Matrix is singular (determinant = 0). Inverse does not exist.</div>`; return; }
+      out.innerHTML = ''; out.appendChild(renderMatrix(i));
+    }
+  } catch(e) {
+    out.innerHTML = `<div class="error-box">Calculation error: ${e.message}</div>`;
+  }
+}
+
+buildGrids();
+</script>
+</body>
+</html>
