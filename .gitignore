@@ -38,3 +38,10 @@ Docs/mymathtools-docs/statistics-calculator-BRD.md
 Docs/mymathtools-docs/statistics-calculator-SPEC.md
 Docs/mymathtools-docs/tip-calculator-BRD.md
 Docs/mymathtools-docs/tip-calculator-SPEC.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
